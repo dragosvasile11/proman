@@ -20,35 +20,34 @@
 
     </head>
     <body>
-       <header id='navbar'>
+        <header id='navbar'>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ url_for('welcome_user') }}">Home</a>
-                      </li>
-
-                    </ul>
-                  </div>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ url_for('welcome_user') }}">Home</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" style="padding-right: 30px; color: rgb(232,158,16);">
-                      {{ 'Signed in as ' + session['username'].split('@')[0].capitalize() if 'username' in session else 'Not signed in' }}
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      {% if 'username' not in session %}
-                          <li><a class="dropdown-item" id='button-form' onclick="document.getElementById('id01').style.display='block'">Login</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" id='button-form' onclick="document.getElementById('id02').style.display='block'">Register</a></li>
-                      {% else %}
-                          <li><a class="dropdown-item" href="{{ url_for('delete_user') }}" style="color: red;">Delete Account</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="{{ url_for('logout') }}">{{ 'Logout' if 'username' in session }} </a></li>
-                      {% endif %}
-                  </ul>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" style="padding-right: 30px; color: rgb(232,158,16);">
+                        {{ 'Signed in as ' + session['username'].split('@')[0].capitalize() if 'username' in session else 'Not signed in' }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% if 'username' not in session %}
+                            <li><a class="dropdown-item" id='button-form' onclick="document.getElementById('id01').style.display='block'">Login</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" id='button-form' onclick="document.getElementById('id02').style.display='block'">Register</a></li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="{{ url_for('delete_user') }}" style="color: red;">Delete Account</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ url_for('logout') }}">{{ 'Logout' if 'username' in session }} </a></li>
+                        {% endif %}
+                    </ul>
                 </li>
-              </nav>
+            </nav>
         </header>
 
         <section>
@@ -62,48 +61,40 @@
         </section>
 
         <div id="id01" class="modal">
-          <form class="modal-content animate" action="{{ url_for('check_user_credentials') }}" method="POST">
+            <form class="modal-content animate" action="{{ url_for('check_user_credentials') }}" method="POST">
+                <div class="container">
+                    <label for="username"><b>Username</b></label>
+                    <input type="email" placeholder="Enter Username" name="username" id='username' required>
 
-            <div class="container">
-              <label for="username"><b>Username</b></label>
-              <input type="email" placeholder="Enter Username" name="username" id='username' required>
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" id='password' required>
 
-              <label for="password"><b>Password</b></label>
-              <input type="password" placeholder="Enter Password" name="password" id='password' required>
-
-              <button class="btn btn-outline-success" type="submit">Login</button>
-            </div>
-            <div><br>
-              <p style="padding-left: 28%">Don't have an account? <a onclick="document.getElementById('id02').style.display='block'" class="stats-text2">Sign UP!</a></p>
-            </div>
-
-          </form>
+                    <button class="btn btn-outline-success" type="submit">Login</button>
+                </div>
+                <div><br>
+                    <p style="padding-left: 28%">Don't have an account? <a onclick="document.getElementById('id02').style.display='block'" class="stats-text2">Sign UP!</a></p>
+                </div>
+            </form>
         </div>
 
         <div id="id02" class="modal">
-          <form class="modal-content animate" action="{{ url_for('register_user') }}" enctype="multipart/form-data" method="POST">
+            <form class="modal-content animate" action="{{ url_for('register_user') }}" enctype="multipart/form-data" method="POST">
+                <div class="container">
+                    <label for="username"><b>Username</b></label>
+                    <input type="email" placeholder="Enter Username" name="username" required>
 
-            <div class="container">
-              <label for="username"><b>Username</b></label>
-              <input type="email" placeholder="Enter Username" name="username" required>
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" required>
 
-              <label for="password"><b>Password</b></label>
-              <input type="password" placeholder="Enter Password" name="password" required>
-
-              <button class="btn btn-outline-success" type="submit">Register</button>
-
-            </div>
-            <div align="center">
-              <br>
-              <p>Have an account? <a href="{{ url_for('check_user_credentials') }}">Sign IN</a></p>
-            </div>
-          </form>
+                    <button class="btn btn-outline-success" type="submit">Register</button>
+                </div>
+                <div align="center">
+                    <br>
+                    <p>Have an account? <a href="{{ url_for('check_user_credentials') }}">Sign IN</a></p>
+                </div>
+            </form>
         </div>
 
-        <div id="root">
-
-        </div>
-
-
+        <div id="root"></div>
     </body>
 </html>
