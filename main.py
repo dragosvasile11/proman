@@ -8,6 +8,7 @@ import mimetypes
 import queires
 
 import data_manager
+import json
 
 mimetypes.add_type('application/javascript', '.js')
 app = Flask(__name__)
@@ -17,13 +18,6 @@ load_dotenv()
 
 
 @app.route("/")
-def index():
-    """
-    This is a one-pager which shows all the boards and cards
-    """
-    return render_template('index.html')
-
-
 def welcome_user():
     if "username" not in session:
         return render_template("welcome.html")
@@ -35,15 +29,15 @@ def welcome_user():
 def register_user():
     if request.method == 'POST':
         username = request.form.get('username')
-        if not (data_manager.check_if_user_exists(username)['exists']):
-            if request.form.get('password') == request.form.get('repeat-password'):
-                password = request.form.get('password')
-                hashed_password = generate_password_hash(password)
-                data_manager.add_user(username, hashed_password)
-                return redirect(url_for("welcome_user"))
+        print(queires.check_if_user_exists(username)['exists'])
+        if not (queires.check_if_user_exists(username)['exists']):
+            password = request.form.get('password')
+            hashed_password = generate_password_hash(password)
+            queires.add_user(username, hashed_password)
+            return redirect(url_for("welcome_user"))
         flash('User already exists')
 
-    return render_template("register.html")
+    return redirect(url_for("welcome_user"))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -51,24 +45,40 @@ def check_user_credentials():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
+        print(queires.check_if_user_exists(username)['exists'])
+        if bool(queires.check_if_user_exists(username)['exists']):
 
-        if bool(data_manager.check_if_user_exists(username)['exists']):
-            hashed_password = data_manager.get_user_password(username)["password"]
+            hashed_password = queires.get_user_password(username)["password"]
             if check_password_hash(hashed_password, password):
                 session['username'] = username
-                session['user_id'] = (data_manager.get_user_id(username))['id']
+                session['user_id'] = (queires.get_user_id(username))['id']
                 return redirect(url_for('welcome_user'))
             else:
                 flash('Wrong password')
         else:
             flash('User does not exist')
-    return render_template("login.html")
+    return redirect(url_for("welcome_user"))
 
 
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect(url_for("welcome_user"))
+
+
+@app.route('/delete_user')
+def delete_user():
+    queires.delete_user(queires.get_user_id(session['username'])['id'])
+    session.clear()
+    flash('Account Deleted')
+    return redirect(url_for("welcome_user"))
+
+
+@app.route("/check-if-user-logged-in")
+def check_logged_in():
+    if 'username' in session:
+        return json.loads('{"response": 1}')
+    return json.loads('{"response": 0}')
 
 
 @app.route("/api/boards")
