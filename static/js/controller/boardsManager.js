@@ -23,3 +23,20 @@ function showHideButtonHandler(clickEvent) {
   const boardId = clickEvent.target.dataset.boardId;
   cardsManager.loadCards(boardId);
 }
+
+
+
+const newBoardButton = document.getElementById("new-board");
+newBoardButton.addEventListener("click", async function() {
+  const boardId = await dataHandler.createNewBoard("new-board");
+  const board = await dataHandler.getBoard(boardId);
+  console.log(board);
+  const boardBuilder = htmlFactory(htmlTemplates.board);
+  const content = boardBuilder(board);
+  domManager.addChild("#root", content);
+  domManager.addEventListener(
+      `.toggle-board-button[data-board-id="${board.id}"]`,
+      "click",
+      showHideButtonHandler
+      );
+});
