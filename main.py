@@ -74,7 +74,8 @@ def delete_user():
     return redirect(url_for("welcome_user"))
 
 
-@app.route("/check-if-user-logged-in")
+@app.route("/api/check-if-user-logged-in")
+@json_response
 def check_logged_in():
     if 'username' in session:
         return json.loads('{"response": 1}')
