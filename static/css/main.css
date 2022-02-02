@@ -18,6 +18,7 @@
 #navbar {
     font-size: large;
     font-weight:500;
+    padding-bottom: 20px;
 }
 
 input[type=email], input[type=password] {
@@ -215,4 +216,18 @@ section.board{
 
 .card-title{
     padding-right: 16px;
+}
+
+/* Buttons */
+
+#new-board {
+    position: relative;
+    left: 80%;
+    display: inline-block;
+}
+
+.title {
+    position: relative;
+    display: inline-block;
+    left: 10%;
 }

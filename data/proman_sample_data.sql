@@ -57,7 +57,7 @@ CREATE TABLE cards (
 --- insert data
 ---
 
-INSERT INTO users(username, password) VALUES ('codecool', 'pbkdf2:sha256:260000$vyuEe9q7l5gJqr1V$0ff7768c7f0feb01ca24470086876a72e437ce98b428b8ee0d3c32ed752d7606');
+INSERT INTO users(username, password) VALUES ('codecool@mail.com', 'pbkdf2:sha256:260000$vyuEe9q7l5gJqr1V$0ff7768c7f0feb01ca24470086876a72e437ce98b428b8ee0d3c32ed752d7606');
 
 INSERT INTO statuses(title) VALUES ('new');
 INSERT INTO statuses(title) VALUES ('in progress');
