@@ -35,9 +35,9 @@ function cardBuilder(card) {
 }
 
 function statusBuilder(status) {
-    return `<div class="board-column">
-                <div class="board-column-title">New</div>
-                <div class="board-column-content"></div>
+    return `<div class="board-column" data-status-id="${status.id}">
+                <div class="board-column-title" data-status-id="${status.id}">"${status.title}"</div>
+                <div class="board-column-content" data-status-id="${status.id}"></div>
             </div>`
 }
 
