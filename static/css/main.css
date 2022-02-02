@@ -2,7 +2,6 @@
     background-color: green;
 }
 
-
 /* Navbar */
 
 #navbarSupportedContent :hover {
@@ -218,7 +217,7 @@ section.board{
     padding-right: 16px;
 }
 
-/* Buttons */
+/* Second header */
 
 #new-board {
     position: relative;

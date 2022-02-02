@@ -96,3 +96,17 @@ def get_user_password(username):
         """
 
     return data_manager.execute_select(query, {"username": username}, fetchall=False)
+
+
+def add_board(user_id, title):
+    query = """
+        INSERT INTO boards VALUES
+            (DEFAULT, %(user_id)s, %(title)s, TRUE)
+            RETURNING boards.id;
+        """
+
+    return data_manager.execute_select(query,
+                                {"user_id": user_id,
+                                 "title": title},
+                                select=True,
+                                fetchall=False)

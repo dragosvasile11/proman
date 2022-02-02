@@ -7,7 +7,6 @@ from util import json_response
 import mimetypes
 import queires
 
-import data_manager
 import json
 
 mimetypes.add_type('application/javascript', '.js')
@@ -17,11 +16,13 @@ app.secret_key = 'proman'
 load_dotenv()
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def welcome_user():
+    if request.form.get('new-board') == '':
+        print("dsaads")
+        queires.add_board()
     if "username" not in session:
         return render_template("welcome.html")
-    request.form.get('')
     return render_template("welcome.html", user=session["username"].split('@')[0].capitalize())
 
 
@@ -99,6 +100,19 @@ def get_cards_for_board(board_id: int):
     :param board_id: id of the parent board
     """
     return queires.get_cards_for_board(board_id)
+
+
+@app.route("/api/add-board/", methods=["GET", "POST"])
+def add_board():
+    payload = request.get_json(force=True, silent=False, cache=False)
+    # print(payload)
+    # print(session["username"], payload["title"])
+    user = queires.get_user_id(session["username"])
+    # print(user["id"])
+    board_id = queires.add_board(user["id"], payload["title"])
+    print(board_id["id"])
+    # json_object = f'{"id": {board_id}}'
+    return json.dumps(board_id["id"])
 
 
 def main():
