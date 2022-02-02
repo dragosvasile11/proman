@@ -230,3 +230,15 @@ section.board{
     display: inline-block;
     left: 10%;
 }
+
+
+/* ContentEditable elements */
+
+#card-title,
+#board-title {
+    width: 100px; 
+    -webkit-line-clamp: 1; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+}
