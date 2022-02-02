@@ -105,13 +105,9 @@ def get_cards_for_board(board_id: int):
 @app.route("/api/add-board/", methods=["GET", "POST"])
 def add_board():
     payload = request.get_json(force=True, silent=False, cache=False)
-    # print(payload)
-    # print(session["username"], payload["title"])
     user = queires.get_user_id(session["username"])
-    # print(user["id"])
     board_id = queires.add_board(user["id"], payload["title"])
     print(board_id["id"])
-    # json_object = f'{"id": {board_id}}'
     return json.dumps(board_id["id"])
 
 

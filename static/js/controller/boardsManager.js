@@ -39,4 +39,6 @@ newBoardButton.addEventListener("click", async function() {
       "click",
       showHideButtonHandler
       );
+  window.location.reload();
 });
+
