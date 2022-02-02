@@ -11,7 +11,7 @@ export let boardsManager = {
       const content = boardBuilder(board);
       domManager.addChild("#root", content);
       domManager.addEventListener(
-        `.toggle-board-button[data-board-id="${board.id}"]`,
+        `.board-toggle[data-board-id="${board.id}"]`,
         "click",
         showHideButtonHandler
       );
@@ -28,17 +28,7 @@ function showHideButtonHandler(clickEvent) {
 
 const newBoardButton = document.getElementById("new-board");
 newBoardButton.addEventListener("click", async function() {
-  const boardId = await dataHandler.createNewBoard("new-board");
-  const board = await dataHandler.getBoard(boardId);
-  console.log(board);
-  const boardBuilder = htmlFactory(htmlTemplates.board);
-  const content = boardBuilder(board);
-  domManager.addChild("#root", content);
-  domManager.addEventListener(
-      `.toggle-board-button[data-board-id="${board.id}"]`,
-      "click",
-      showHideButtonHandler
-      );
+  await dataHandler.createNewBoard("new-board");
   window.location.reload();
 });
 
