@@ -103,12 +103,22 @@ def get_cards_for_board(board_id: int):
 
 
 @app.route("/api/add-board/", methods=["GET", "POST"])
+@json_response
 def add_board():
     payload = request.get_json(force=True, silent=False, cache=False)
     user = queires.get_user_id(session["username"])
     board_id = queires.add_board(user["id"], payload["title"])
-    print(board_id["id"])
     return json.dumps(board_id["id"])
+
+
+@app.route("/api/add-card/", methods=["GET", "POST"])
+@json_response
+def add_card():
+    payload = request.get_json(force=True, silent=False, cache=False)
+    countCards = str(len(queires.get_cards_for_board(payload["boardId"]))+ 1)
+    card_id = queires.add_card(payload["boardId"], f"{payload['title']} {countCards}")
+    print(card_id)
+    return json.dumps(card_id)
 
 
 @app.route("/api/statuses/")
