@@ -7,7 +7,6 @@ import { statusesManager } from "./statusesManager.js";
 export let boardsManager = {
   loadBoards: async function () {
     const boards = await dataHandler.getBoards();
-    console.log(boards)
     for (let board of boards) {
       const boardBuilder = htmlFactory(htmlTemplates.board);
       const content = boardBuilder(board);
@@ -23,10 +22,15 @@ export let boardsManager = {
 
 function showHideButtonHandler(clickEvent) {
   const boardId = clickEvent.target.dataset.boardId;
-  console.log("board id inainte de loadStatuses" + boardId)
-  let statusPromise = statusesManager.loadStatuses(boardId);
-  console.log(statusPromise)
-  // cardsManager.loadCards(boardId);
+  const statusPromise = new Promise((resolve, reject) => {
+    resolve(statusesManager.loadStatuses(boardId))
+  })
+  statusPromise.then(values => {
+      console.log(statusPromise)
+      console.log(values)
+      cardsManager.loadCards(boardId);
+  })
+
 }
 
 
