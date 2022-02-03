@@ -8,7 +8,7 @@ export function htmlFactory(template) {
     switch (template) {
         case htmlTemplates.board:
             return boardBuilder
-        case htmlTemplates.card:
+        case htmlTemplates.card: case htmlTemplates.newCard:
             return cardBuilder
         case htmlTemplates.status:
             return statusBuilder
@@ -19,9 +19,9 @@ export function htmlFactory(template) {
 }
 
 function boardBuilder(board) {
-    return `<section class="board" data-board-id=${board.id}>
+    return `<section class="board" section-board-id=${board.id}>
                 <div class="board-header" data-board-id=${board.id}><span class="board-title"><p id="board-title" contenteditable="true" onkeypress="return (this.innerText.length <= 15)">${board.title}</p></span>
-                    <button class="board-add">+ New Card</button>
+                    <button class="board-add-button">+ New Card</button>
                     <button class="board-toggle hidden" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
                 </div>
                 <div class="board-columns" data-board-id="${board.id}">
