@@ -34,6 +34,17 @@ def get_boards():
     )
 
 
+def get_board_title(board_id):
+    return data_manager.execute_select(
+        '''
+        SELECT title FROM boards
+        WHERE id = %(board_id)s
+        '''
+        , {"board_id": board_id}, 
+        fetchall=False
+    )
+
+
 def get_cards_for_board(board_id):
     # remove this code once you implement the database
     # return [{"title": "title1", "id": 1}, {"title": "board2", "id": 2}]
