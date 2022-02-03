@@ -8,8 +8,8 @@ export let statusesManager = {
         for (let status of statuses) {
             const statusBuilder = htmlFactory(htmlTemplates.status);
             const content = statusBuilder(status);
-            console.log(content + " cum vine data status")
-            domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content);
+            // console.log(content + " cum vine data status")
+            domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content, "beforeend");
         }
     }
 }
