@@ -111,6 +111,15 @@ def add_board():
     return json.dumps(board_id["id"])
 
 
+@app.route("/api/statuses/")
+@json_response
+def get_statuses():
+    """
+    All the statuses
+    """
+    return queires.get_statuses()
+
+
 def main():
     app.run(debug=True)
 

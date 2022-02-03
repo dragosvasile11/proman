@@ -10,6 +10,9 @@ export let dataHandler = {
   },
   getStatuses: async function () {
     // the statuses are retrieved and then the callback function is called with the statuses
+      const response = await apiGet("/api/statuses");
+      console.log(response + "din getStatuses func");
+      return response;
   },
   getStatus: async function (statusId) {
     // the status is retrieved and then the callback function is called with the status
@@ -33,6 +36,7 @@ export let dataHandler = {
 };
 
 async function apiGet(url) {
+    console.log(url)
   let response = await fetch(url, {
     method: "GET",
   });

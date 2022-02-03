@@ -110,3 +110,16 @@ def add_board(user_id, title):
                                  "title": title},
                                 select=True,
                                 fetchall=False)
+
+
+def get_statuses():
+    """
+    Gather all statuses
+    :return:
+    """
+
+    return data_manager.execute_select(
+        """
+        SELECT * FROM statuses;
+        """
+    )
