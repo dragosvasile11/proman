@@ -21,6 +21,13 @@ export let boardsManager = {
 };
 
 function showHideButtonHandler(clickEvent) {
+  const boardColumns = document.getElementsByClassName("board-columns");
+  for (let column of boardColumns) {
+    while (column.firstChild) {
+      column.removeChild(column.firstChild);
+  }
+  }
+
   const boardId = clickEvent.target.dataset.boardId;
   const statusPromise = new Promise((resolve, reject) => {
     resolve(statusesManager.loadStatuses(boardId))
