@@ -20,7 +20,7 @@ export function htmlFactory(template) {
 
 function boardBuilder(board) {
     return `<section class="board" data-board-id=${board.id}>
-                <div class="board-header" data-board-id=${board.id}><span class="board-title"><p id="board-title" contenteditable="true" onkeypress="return (this.innerText.length <= 10)">${board.title}</p></span>
+                <div class="board-header" data-board-id=${board.id}><span class="board-title"><p id="board-title" contenteditable="true" onkeypress="return (this.innerText.length <= 15)">${board.title}</p></span>
                     <button class="board-add">+ New Card</button>
                     <button class="board-toggle hidden" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
                 </div>
@@ -31,7 +31,7 @@ function boardBuilder(board) {
 
 function cardBuilder(card) {
     return `<div class="card" data-card-order="${card.card_order}" data-card-id="${card.id}" data-board-id="${card.board_id}">
-                <span class="card-title" id="card-title" contenteditable="true">${card.title}</span>
+                <span class="card-title" id="card-title" contenteditable="true" onkeypress="return (this.innerText.length <= 15)">${card.title}</span>
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
                 <div class="card-title" data-board-id="${card.board_id}" data-card-id="${card.id}"></div>
             </div>`

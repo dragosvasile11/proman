@@ -236,7 +236,7 @@ section.board{
 
 #card-title,
 #board-title {
-    width: 100px; 
+    width: fit-content;
     -webkit-line-clamp: 1; 
     overflow: hidden; 
     text-overflow: ellipsis; 

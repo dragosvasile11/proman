@@ -54,6 +54,9 @@ function initElements() {
 
 function handleDragStart(event) {
   game.dragged = event.currentTarget;
+  console.log("Drag start of", game.dragged);
+  game.dragged.style.opacity = "0.5";
+  ui.cards.style.border = "2px solid red";
 }
 
 function deleteButtonHandler(clickEvent) {}
