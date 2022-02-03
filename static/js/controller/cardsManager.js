@@ -2,6 +2,12 @@ import { dataHandler } from "../data/dataHandler.js";
 import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 
+const ui = {
+  slots: null,
+  cards: null,
+  dragged: null
+};
+
 export let cardsManager = {
   loadCards: async function (boardId) {
     const cards = await dataHandler.getCardsByBoardId(boardId);
@@ -22,8 +28,21 @@ export let cardsManager = {
         "click",
         deleteButtonHandler
       );
+
     }
   },
+  initDragAndDrop: function () {
+    initElements();
+  }
 };
+
+function initElements() {
+  ui.cards = document.querySelectorAll(".card");
+  ui.slots = document.querySelectorAll(".board-column-content");
+
+  ui.cards.forEach(function (card) {
+    card.setAttribute("draggable", true);
+  });
+}
 
 function deleteButtonHandler(clickEvent) {}

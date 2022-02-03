@@ -30,15 +30,16 @@ function boardBuilder(board) {
 }
 
 function cardBuilder(card) {
-    return `<div class="card" data-card-order="${card.card_order}" data-card-id="${card.id}" data-board-id="${card.board_id}"><span class="card-title"><p id="card-title" contenteditable="true" onkeypress="return (this.innerText.length <= 10)">${card.title}</p></span>
+    return `<div class="card" data-card-order="${card.card_order}" data-card-id="${card.id}" data-board-id="${card.board_id}">
+                <span class="card-title" id="card-title" contenteditable="true">${card.title}</span>
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
                 <div class="card-title" data-board-id="${card.board_id}" data-card-id="${card.id}"></div>
             </div>`
 }
 
 function statusBuilder(status) {
-    return `<div class="board-column" data-status-id="${status.id}">
-                <div class="board-column-title" data-status-id="${status.id}" contentEditable="true">"${status.title}"</div>
+    return `<div  align="center" class="board-column" data-status-id="${status.id}">
+                <span class="board-column-title" data-status-id="${status.id}" contentEditable="true">${status.title}</span>
                 <div class="board-column-content" data-status-id="${status.id}" data-board-id=""></div>
             </div>`
 }
