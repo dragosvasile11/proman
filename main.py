@@ -111,7 +111,7 @@ def add_board():
     return json.dumps(board_id["id"])
 
 
-@app.route("/api/statuses")
+@app.route("/api/statuses/")
 @json_response
 def get_statuses():
     """

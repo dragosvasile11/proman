@@ -120,7 +120,6 @@ def get_statuses():
 
     return data_manager.execute_select(
         """
-        SELECT * FROM statuses
-        ;
+        SELECT * FROM statuses;
         """
     )
