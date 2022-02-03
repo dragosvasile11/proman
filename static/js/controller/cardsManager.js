@@ -8,6 +8,11 @@ const ui = {
   dragged: null
 };
 
+const game = {
+    dragged: null,
+};
+
+
 export let cardsManager = {
   loadCards: async function (boardId) {
     const cards = await dataHandler.getCardsByBoardId(boardId);
@@ -28,7 +33,9 @@ export let cardsManager = {
         "click",
         deleteButtonHandler
       );
-
+      domManager.addEventListener(
+          `.board-column-content[data-status-id="${card.card_order}"][data-board-id="${card.board_id}"]`,
+          "dragstart", handleDragStart)
     }
   },
   initDragAndDrop: function () {
@@ -43,6 +50,10 @@ function initElements() {
   ui.cards.forEach(function (card) {
     card.setAttribute("draggable", true);
   });
+}
+
+function handleDragStart(event) {
+  game.dragged = event.currentTarget;
 }
 
 function deleteButtonHandler(clickEvent) {}
