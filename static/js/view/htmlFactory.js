@@ -24,7 +24,7 @@ function boardBuilder(board) {
                     <button class="board-add">+ New Card</button>
                     <button class="board-toggle hidden" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
                 </div>
-                <div class="board-columns" data-board-id=${board.id}>
+                <div class="board-columns" data-board-id="${board.id}">
                 </div>
             </section>`;
 }

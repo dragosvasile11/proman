@@ -12,7 +12,6 @@ export let boardsManager = {
       const boardBuilder = htmlFactory(htmlTemplates.board);
       const content = boardBuilder(board);
       domManager.addChild("#root", content);
-
       domManager.addEventListener(
         `.board-toggle[data-board-id="${board.id}"]`,
         "click",
@@ -24,8 +23,10 @@ export let boardsManager = {
 
 function showHideButtonHandler(clickEvent) {
   const boardId = clickEvent.target.dataset.boardId;
-  statusesManager.loadStatuses(boardId);
-  cardsManager.loadCards(boardId);
+  console.log("board id inainte de loadStatuses" + boardId)
+  let statusPromise = statusesManager.loadStatuses(boardId);
+  console.log(statusPromise)
+  // cardsManager.loadCards(boardId);
 }
 
 
