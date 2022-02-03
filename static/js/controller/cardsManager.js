@@ -19,12 +19,12 @@ export let cardsManager = {
     for (let card of cards) {
       const cardBuilder = htmlFactory(htmlTemplates.card);
       const content = cardBuilder(card);
-      console.log(content + " cum vine data card")
+      // console.log(content + " cum vine data card")
 
       const columns = document.getElementsByClassName("board-column-content");
       for (let column of columns) {
         column.setAttribute("data-board-id", boardId);
-        console.log("imi ia column => " + column + " si adauga " + boardId)
+        // console.log("imi ia column => " + column + " si adauga " + boardId)
       }
 
       domManager.addChild(`.board-column-content[data-status-id="${card.card_order}"][data-board-id="${card.board_id}"]`, content);
@@ -43,6 +43,9 @@ export let cardsManager = {
   }
 };
 
+addNewCard()
+
+
 function initElements() {
   ui.cards = document.querySelectorAll(".card");
   ui.slots = document.querySelectorAll(".board-column-content");
@@ -60,3 +63,22 @@ function handleDragStart(event) {
 }
 
 function deleteButtonHandler(clickEvent) {}
+
+
+function addNewCard () {
+
+    addEventListener('click', async(event) => {
+      if (event.target.className === 'board-add-button') {
+        const boardId = event.target.parentElement.getAttribute('data-board-id');
+        console.log(boardId)
+        let newCard = await dataHandler.createNewCard("new-card", boardId, 1);
+        console.log(newCard)
+        if (document.querySelector(`.card-title[data-board-id="${boardId}"]`)) {
+        const cardBuilder = htmlFactory(htmlTemplates.newCard);
+            const content = cardBuilder(newCard);
+            domManager.addChild(`.board-column-content[data-status-id="${newCard.card_order}"][data-board-id="${newCard.board_id}"]`, content);
+        }
+      }
+    })
+}
+
