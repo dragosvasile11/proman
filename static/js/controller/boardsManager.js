@@ -14,32 +14,32 @@ export let boardsManager = {
       domManager.addChild("#root", content);
       domManager.addEventListener(
         `.board-toggle[data-board-id="${board.id}"]`,
-        "click",
-        showHideButtonHandler
+        "click"
       );
+      statusesManager.loadStatuses(board.id).then(value => cardsManager.loadCards(board.id))
     }
   },
 };
 
-function showHideButtonHandler(clickEvent) {
-  const boardColumns = document.getElementsByClassName("board-columns");
-  for (let column of boardColumns) {
-    while (column.firstChild) {
-      column.removeChild(column.firstChild);
-  }
-  }
+// function showHideButtonHandler(clickEvent) {
+//   const boardColumns = document.getElementsByClassName("board-columns");
+//   for (let column of boardColumns) {
+//     while (column.firstChild) {
+//       column.removeChild(column.firstChild);
+//   }
+//   }
 
-  const boardId = clickEvent.target.dataset.boardId;
-  const statusPromise = new Promise((resolve, reject) => {
-    resolve(statusesManager.loadStatuses(boardId))
-  })
-  statusPromise.then(values => {
-      // console.log(statusPromise)
-      // console.log(values)
-      cardsManager.loadCards(boardId);
-  })
+//   const boardId = clickEvent.target.dataset.boardId;
+//   const statusPromise = new Promise((resolve, reject) => {
+//     resolve(statusesManager.loadStatuses(boardId))
+//   })
+//   statusPromise.then(values => {
+//       // console.log(statusPromise)
+//       // console.log(values)
+//       cardsManager.loadCards(boardId);
+//   })
 
-}
+// }
 
 
 const newBoardButton = document.getElementById("new-board");
@@ -50,9 +50,8 @@ newBoardButton.addEventListener("click", async function() {
       domManager.addChild("#root", content);
       domManager.addEventListener(
         `.board-toggle[data-board-id="${newBoard.id}"]`,
-        "click",
-        showHideButtonHandler
+        "click"
       );
-  // window.location.reload();
+      statusesManager.loadStatuses(newBoard.id)
 });
 
