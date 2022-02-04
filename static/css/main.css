@@ -14,9 +14,10 @@
     padding-top: 50px;
 }
 
+
 #navbar {
     font-size: large;
-    font-weight:500;
+    font-weight:600;
     padding-bottom: 20px;
 }
 
@@ -229,13 +230,6 @@ section.board{
     display: inline-block;
 }
 
-.title {
-    position: relative;
-    display: inline-block;
-    left: 10%;
-}
-
-
 /* ContentEditable elements */
 
 #card-title,
@@ -255,7 +249,7 @@ section.board{
 }
 
 .title-image {
-    position: fixed;
+    position:absolute;
     right: 43%;
 }
 
