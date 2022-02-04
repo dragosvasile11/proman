@@ -4,6 +4,7 @@ import { domManager } from "../view/domManager.js";
 import { cardsManager } from "./cardsManager.js";
 import { statusesManager } from "./statusesManager.js";
 
+
 export let boardsManager = {
   loadBoards: async function () {
     const boards = await dataHandler.getBoards();
@@ -33,8 +34,8 @@ function showHideButtonHandler(clickEvent) {
     resolve(statusesManager.loadStatuses(boardId))
   })
   statusPromise.then(values => {
-      console.log(statusPromise)
-      console.log(values)
+      // console.log(statusPromise)
+      // console.log(values)
       cardsManager.loadCards(boardId);
   })
 
@@ -43,7 +44,15 @@ function showHideButtonHandler(clickEvent) {
 
 const newBoardButton = document.getElementById("new-board");
 newBoardButton.addEventListener("click", async function() {
-  await dataHandler.createNewBoard("new-board");
-  window.location.reload();
+  let newBoard = await dataHandler.createNewBoard("new-board");
+  const boardBuilder = htmlFactory(htmlTemplates.board);
+      const content = boardBuilder(newBoard);
+      domManager.addChild("#root", content);
+      domManager.addEventListener(
+        `.board-toggle[data-board-id="${newBoard.id}"]`,
+        "click",
+        showHideButtonHandler
+      );
+  // window.location.reload();
 });
 
