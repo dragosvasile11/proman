@@ -37,10 +37,10 @@ function cardBuilder(card) {
             </div>`
 }
 
-function statusBuilder(status) {
+function statusBuilder(status, boardId) {
     return `<div  align="center" class="board-column" data-status-id="${status.id}">
                 <span class="board-column-title" data-status-id="${status.id}" contentEditable="true">${status.title}</span>
-                <div class="board-column-content" data-status-id="${status.id}" data-board-id=""></div>
+                <div class="board-column-content" data-status-id="${status.id}" data-board-id="${boardId}"></div>
             </div>`
 }
 
