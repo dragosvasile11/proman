@@ -1,7 +1,7 @@
 import data_manager
 
 
-def get_card_status(status_id):
+def get_card_status(board_id):
     """
     Find the first status matching the given id
     :param status_id:
@@ -9,11 +9,14 @@ def get_card_status(status_id):
     """
     status = data_manager.execute_select(
         """
-        SELECT * FROM statuses s
-        WHERE s.id = %(status_id)s
+        SELECT * FROM statuses
+        WHERE board_id = %(board_id)s
+        LIMIT 1
         ;
         """
-        , {"status_id": status_id})
+        , {"board_id": board_id},
+        fetchall=False
+        )
 
     return status
 
