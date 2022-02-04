@@ -18,6 +18,10 @@
         <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
         <script type="module" src="{{ url_for('static', filename='js/controller/page_actions.js') }}" defer></script>
 
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/solid.css" integrity="sha384-rdyFrfAIC05c5ph7BKz3l5NG5yEottvO/DQ0dCrwD8gzeQDjYBHNr1ucUpQuljos" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/fontawesome.css" integrity="sha384-u5J7JghGz0qUrmEsWzBQkfvc8nK3fUT7DCaQzNQ+q4oEXhGSx+P2OqjWsfIRB8QT" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 
     </head>
     <body>
@@ -29,6 +33,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="{{ url_for('welcome_user') }}">Home</a>
                             </li>
+                            <button type="button" class="btn btn-outline-blue" id="new-board" name="new-board" {{ "hidden" if "username" not in session }}>+ New Board</button>
+                            <div>
+                                <img class="title-image" src="{{ url_for('static', filename='title.png') }}"/>
+                            </div>
                         </ul>
                     </div>
                 </div>
@@ -94,11 +102,6 @@
                     <p>Have an account? <a href="{{ url_for('check_user_credentials') }}">Sign IN</a></p>
                 </div>
             </form>
-        </div>
-
-        <div class="second-header">
-            <h3 class="title">ProMan</h3>
-            <button type="button" class="btn btn-outline-dark" id="new-board" name="new-board">+ New Board</button>
         </div>
 
         <div id="root"></div>
