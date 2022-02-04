@@ -136,6 +136,21 @@ def add_card():
     return card
 
 
+@app.route("/api/add-status/", methods=["GET", "POST"])
+@json_response
+def add_status():
+
+    if 'username' not in session:
+        return {'message': 'Log in to add new card !', 'status': 201}
+    
+    payload = request.get_json(force=True, silent=False, cache=False)
+    countStatuses = str(len(queires.get_statuses_for_board(payload["boardId"]))+ 1)
+    print(countStatuses)
+    print(payload)
+    status = queires.add_status(payload["boardId"], f"{payload['title']} {countStatuses}")
+    return status
+
+
 def main():
     app.run(debug=True)
 

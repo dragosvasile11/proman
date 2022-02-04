@@ -13,3 +13,24 @@ export let statusesManager = {
         }
     }
 }
+
+
+addNewColumn ()
+
+
+function addNewColumn () {
+
+    addEventListener('click', async(event) => {
+      if (event.target.id === 'new-column') {
+        let boardId = event.target.parentElement.parentElement.getAttribute('data-board-id');
+        let newStatus = await dataHandler.createNewStatus("new-status", boardId);
+        if (!('status' in newStatus)) {
+          if (document.querySelector(`.board-columns[data-board-id="${boardId}"]`).hasChildNodes()) {
+            const statusBuilder = htmlFactory(htmlTemplates.status);
+                const content = statusBuilder(newStatus, boardId);
+                domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content, "beforeend");
+          }
+        }
+      }
+    })
+  }
