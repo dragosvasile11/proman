@@ -32,6 +32,7 @@ def get_boards():
     return data_manager.execute_select(
         """
         SELECT * FROM boards
+        ORDER BY id
         ;
         """
     )
@@ -56,6 +57,7 @@ def get_cards_for_board(board_id):
         """
         SELECT * FROM cards
         WHERE cards.board_id = %(board_id)s
+        ORDER BY id
         ;
         """
         , {"board_id": board_id})
@@ -69,6 +71,7 @@ def get_statuses_for_board(board_id):
         """
         SELECT * FROM statuses
         WHERE statuses.board_id = %(board_id)s
+        ORDER BY id
         ;
         """
         , {"board_id": board_id})
@@ -169,3 +172,13 @@ def add_status(board_id, status_title):
                                 select=True,
                                 fetchall=False)
 
+
+def edit_title(table, id, content):
+    return data_manager.execute_select(
+        f'''
+        UPDATE {table}
+            SET title = '{content}'
+        WHERE id = {id}
+        '''
+        ,select=False
+    )

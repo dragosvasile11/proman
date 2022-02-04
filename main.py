@@ -150,10 +150,19 @@ def add_status():
     
     payload = request.get_json(force=True, silent=False, cache=False)
     countStatuses = str(len(queires.get_statuses_for_board(payload["boardId"]))+ 1)
-    print(countStatuses)
-    print(payload)
     status = queires.add_status(payload["boardId"], f"{payload['title']} {countStatuses}")
     return status
+
+
+@app.route("/api/update-content/", methods=["PUT"])
+@json_response
+def edit_content():
+    
+    if 'username' not in session:
+        return {'message': 'Log in to edit content !', 'status': 201}
+    
+    payload = request.get_json(force=True, silent=False, cache=False)
+    queires.edit_title(payload['board'], payload['id'], payload['content'])
 
 
 def main():
