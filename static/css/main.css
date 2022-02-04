@@ -250,3 +250,8 @@ section.board{
     width: 20px;
 }
 
+.title-image {
+    position: fixed;
+    right: 43%;
+}
+
