@@ -120,6 +120,10 @@ def add_board():
     user = queires.get_user_id(session["username"])
     countBoards = str(len(queires.get_boards())+ 1)
     board = queires.add_board(user["id"], f'{payload["title"]} {countBoards}')
+    
+    initial_statuses = ['new', 'in progress', 'testing', 'done']
+    [queires.add_status(board['id'], title) for title in initial_statuses]
+    
     return board
 
 
