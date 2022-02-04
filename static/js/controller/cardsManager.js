@@ -76,6 +76,11 @@ function addNewCard () {
         const cardBuilder = htmlFactory(htmlTemplates.newCard);
             const content = cardBuilder(newCard);
             domManager.addChild(`.board-column-content[data-status-id="${newCard.card_order}"][data-board-id="${newCard.board_id}"]`, content);
+            domManager.addEventListener(
+              `.card[data-card-id="${newCard.id}"]`,
+              "click",
+              deleteButtonHandler
+            );
       }
     }
   })
