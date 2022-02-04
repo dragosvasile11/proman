@@ -1,3 +1,5 @@
+import { dataHandler } from "../data/dataHandler.js";
+
 let defaultText = null;
 
 addEventListener('click', event => {
@@ -24,8 +26,23 @@ addEventListener('click', event => {
 
         event.target.addEventListener('blur', e => {
 
-            if (event.target.innerHTML == '') {
+            if (event.target.innerHTML == '' || event.target.innerHTML === defaultText) {
                 event.target.innerHTML = defaultText
+                return
+            }
+            let newText = event.target.innerHTML;
+            let elementId = event.target.id;
+            switch (event.target.className) {
+                case 'boardTitle':
+                    let table = `boards`
+                    dataHandler.editContent(table, elementId, newText);
+                    break;
+                case 'card-title':
+                    dataHandler.editContent('cards', elementId, newText);
+                    break
+                case 'board-column-title':
+                    dataHandler.editContent('statuses', elementId, newText);
+                    break
             }
         })
     }
