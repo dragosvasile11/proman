@@ -221,6 +221,11 @@ section.board{
     padding-right: 16px;
 }
 
+.boardTitle:hover,
+.card:hover{
+    color: rgb(70,195,249);
+}
+
 /* Second header */
 
 #new-board {
@@ -232,10 +237,11 @@ section.board{
 
 /* ContentEditable elements */
 
+.board-column-title,
 #card-title,
-#board-title {
+.boardTitle {
     width: fit-content;
-    -webkit-line-clamp: 1; 
+    -webkit-line-clamp: 2; 
     overflow: hidden; 
     text-overflow: ellipsis; 
     display: -webkit-box;
@@ -259,6 +265,7 @@ section.board{
 }
 
 .card-buttons {
-    position: sticky;
+    margin: 8px;
+    position:absolute;
     left: 25%;
 }
