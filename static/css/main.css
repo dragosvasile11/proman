@@ -5,7 +5,7 @@
 /* Navbar */
 
 #navbarSupportedContent :hover {
-  color: rgb(232,158,16);
+  color: rgb(70,195,249);
 }
 
 .flashes {
@@ -63,7 +63,7 @@ span.password {
 
   background-color: rgb(33,37,41);
   margin: 5% auto 15% auto;
-  border: 3px solid rgb(232,158,16);
+  border: 3px solid rgb(70,195,249);
   width: 35%;
   top: 20%;
   color: white
@@ -119,6 +119,7 @@ button{
     font-size: 14px;
     font-family: sans-serif;
     padding: 4px 10px;
+    border-radius: 4px;
 }
 
 #root{
@@ -134,9 +135,10 @@ section.board{
 }
 
 .board-header{
-    height: 50px;
+    height: 55px;
     background: #fff;
     border-radius: var(--border-radius) var(--border-radius) 0 0;
+    align-items: center;
 }
 
 .board-title{
@@ -147,6 +149,7 @@ section.board{
 .board-title, .board-add, .board-toggle{
     display: inline-block;
 }
+
 
 .board-toggle{
     float: right;
@@ -220,8 +223,9 @@ section.board{
 /* Second header */
 
 #new-board {
+    color: rgb(155,157,158);
     position: relative;
-    left: 80%;
+    left: 20%;
     display: inline-block;
 }
 
@@ -255,3 +259,12 @@ section.board{
     right: 43%;
 }
 
+.btn:focus:not(:focus-visible) {
+    outline: 0;
+    box-shadow: none;
+}
+
+.card-buttons {
+    position: sticky;
+    left: 25%;
+}
