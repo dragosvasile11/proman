@@ -113,7 +113,7 @@ def add_board(user_id, title):
     query = """
         INSERT INTO boards VALUES
             (DEFAULT, %(user_id)s, %(title)s, TRUE)
-            RETURNING boards.id;
+            RETURNING id, title;
         """
 
     return data_manager.execute_select(query,
