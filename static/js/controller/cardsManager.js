@@ -27,14 +27,14 @@ export let cardsManager = {
       //   console.log("imi ia column => " + column + " si adauga " + boardId)
       // }
 
-      domManager.addChild(`.board-column-content[data-status-id="${card.card_order}"][data-board-id="${card.board_id}"]`, content);
+      domManager.addChild(`.board-column-content[data-status-id="${card.status_id}"][data-board-id="${card.board_id}"]`, content);
       domManager.addEventListener(
         `.card[data-card-id="${card.id}"]`,
         "click",
         deleteButtonHandler
       );
       domManager.addEventListener(
-          `.board-column-content[data-status-id="${card.card_order}"][data-board-id="${card.board_id}"]`,
+          `.board-column-content[data-status-id="${card.status_id}"][data-board-id="${card.board_id}"]`,
           "dragstart", handleDragStart)
     }
   },
@@ -70,13 +70,13 @@ function addNewCard () {
 
   addEventListener('click', async(event) => {
     if (event.target.id === 'new-card') {
-      let boardId = event.target.parentElement.getAttribute('data-board-id');
+      let boardId = event.target.parentElement.parentElement.getAttribute('data-board-id');
       let newCard = await dataHandler.createNewCard("new-card", boardId, 1);
       if (!('status' in newCard)) {
         if (document.querySelector(`.board-columns[data-board-id="${boardId}"]`).hasChildNodes()) {
           const cardBuilder = htmlFactory(htmlTemplates.newCard);
               const content = cardBuilder(newCard);
-              domManager.addChild(`.board-column-content[data-status-id="${newCard.card_order}"][data-board-id="${newCard.board_id}"]`, content);
+              domManager.addChild(`.board-column-content[data-status-id="${newCard.status_id}"][data-board-id="${newCard.board_id}"]`, content);
               domManager.addEventListener(
                 `.card[data-card-id="${newCard.id}"]`,
                 "click",
