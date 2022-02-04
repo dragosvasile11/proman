@@ -6,9 +6,11 @@ addEventListener('click', event => {
         let boardId = event.target.dataset.boardId;
         let boardContent = document.querySelector(`.board-columns[data-board-id="${boardId}"]`)
         if (boardContent.hidden === true) {
-            boardContent.hidden = false; 
+            boardContent.hidden = false;
+            event.target.children[0].src = "./static/chevronUp.png"
         }else {
             boardContent.hidden = true;
+            event.target.children[0].src = "./static/chevronDown.png"
         }
     }
 
