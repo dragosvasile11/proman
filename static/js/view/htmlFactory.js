@@ -22,8 +22,8 @@ function boardBuilder(board) {
     return `<section class="board" section-board-id=${board.id}>
                 <div class="board-header" data-board-id=${board.id}><span class="board-title"><p id="board-title" contenteditable="true" onkeypress="return (this.innerText.length <= 15)">${board.title}</p></span>
                     <span class="card-buttons">
-                        <button class="board-add-button btn btn-outline-dark" type="button" id="new-card" name="new-card">+ New Card</button>
-                        <button class="board-add-button btn btn-outline-dark" type="button" id="new-column" name="new-card">+ New Column</button>
+                        <button class="board-add-button btn btn-outline-info" type="button" id="new-card" name="new-card">+ New Card</button>
+                        <button class="board-add-button btn btn-outline-info" type="button" id="new-column" name="new-card">+ New Column</button>
                     </span>
                     <button class="board-toggle hidden" data-board-id="${board.id}"><img id="chevron" src="./static/chevronDown.png" /></button>
                 </div>
