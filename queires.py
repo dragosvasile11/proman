@@ -136,15 +136,22 @@ def add_board(user_id, title):
                                 fetchall=False)
 
 
-def add_card(board_id, card_title):
+def add_card(board_id, card_title, status_id):
     query = """
         INSERT INTO cards VALUES
-            (DEFAULT, %(board_id)s, 1, %(card_title)s, 1)
+            (DEFAULT, %(board_id)s, %(status_id)s, %(card_title)s, 1)
             RETURNING id, board_id, status_id, title, card_order;
         """
 
     return data_manager.execute_select(query,
                                 {"board_id": board_id,
+                                 "card_title": card_title,
+                                 "status_id": status_id
+                                },
+                                select=True,
+                                fetchall=False)
+
+
 def add_status(board_id, status_title):
     query = """
         INSERT INTO statuses VALUES

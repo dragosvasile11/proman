@@ -136,7 +136,8 @@ def add_card():
     
     payload = request.get_json(force=True, silent=False, cache=False)
     countCards = str(len(queires.get_cards_for_board(payload["boardId"]))+ 1)
-    card = queires.add_card(payload["boardId"], f"{payload['title']} {countCards}")
+    status_id = queires.get_card_status(payload["boardId"])
+    card = queires.add_card(payload["boardId"], f"{payload['title']} {countCards}", status_id['id'])
     return card
 
 
