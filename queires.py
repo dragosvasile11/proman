@@ -60,6 +60,19 @@ def get_cards_for_board(board_id):
     return matching_cards
 
 
+def get_statuses_for_board(board_id):
+
+    matching_statuses = data_manager.execute_select(
+        """
+        SELECT * FROM statuses
+        WHERE statuses.board_id = %(board_id)s
+        ;
+        """
+        , {"board_id": board_id})
+
+    return matching_statuses
+
+
 def add_user(username, password):
     query = """
         INSERT INTO users VALUES
@@ -136,16 +149,3 @@ def add_card(board_id, card_title):
                                 },
                                 select=True,
                                 fetchall=False)
-
-
-def get_statuses():
-    """
-    Gather all statuses
-    :return:
-    """
-
-    return data_manager.execute_select(
-        """
-        SELECT * FROM statuses;
-        """
-    )

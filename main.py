@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, session, request, flash, redirect
+from flask import Flask, render_template, url_for, session, request, flash, redirect, Response
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
@@ -18,9 +18,6 @@ load_dotenv()
 
 @app.route("/", methods=['GET', 'POST'])
 def welcome_user():
-    if request.form.get('new-board') == '':
-        print("dsaads")
-        queires.add_board()
     if "username" not in session:
         return render_template("welcome.html")
     return render_template("welcome.html", user=session["username"].split('@')[0].capitalize())
@@ -102,6 +99,16 @@ def get_cards_for_board(board_id: int):
     return queires.get_cards_for_board(board_id)
 
 
+@app.route("/api/boards/<int:board_id>/statuses/")
+@json_response
+def get_statuses_for_board(board_id: int):
+    """
+    All statuses that belongs to a board
+    :param board_id: id of the parent board
+    """
+    return queires.get_statuses_for_board(board_id)
+
+
 @app.route("/api/add-board/", methods=["GET", "POST"])
 @json_response
 def add_board():
@@ -127,15 +134,6 @@ def add_card():
     countCards = str(len(queires.get_cards_for_board(payload["boardId"]))+ 1)
     card = queires.add_card(payload["boardId"], f"{payload['title']} {countCards}")
     return card
-
-
-@app.route("/api/statuses/")
-@json_response
-def get_statuses():
-    """
-    All the statuses
-    """
-    return queires.get_statuses()
 
 
 def main():
