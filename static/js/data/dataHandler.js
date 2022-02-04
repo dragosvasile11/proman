@@ -54,6 +54,9 @@ async function apiPost(url, payload) {
 
     if (request.ok) {
         const response = await request.json();
+        if (response.status === 201) {
+          alert(response.message)
+        }
         return response;
     } else {
         alert(`There was an error during creating new board ${payload}`);

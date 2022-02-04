@@ -45,13 +45,15 @@ export let boardsManager = {
 const newBoardButton = document.getElementById("new-board");
 newBoardButton.addEventListener("click", async function() {
   let newBoard = await dataHandler.createNewBoard("new-board");
-  const boardBuilder = htmlFactory(htmlTemplates.board);
-      const content = boardBuilder(newBoard);
-      domManager.addChild("#root", content);
-      domManager.addEventListener(
-        `.board-toggle[data-board-id="${newBoard.id}"]`,
-        "click"
-      );
-      statusesManager.loadStatuses(newBoard.id)
+  if (!('status' in newBoard)) {
+    const boardBuilder = htmlFactory(htmlTemplates.board);
+        const content = boardBuilder(newBoard);
+        domManager.addChild("#root", content);
+        domManager.addEventListener(
+          `.board-toggle[data-board-id="${newBoard.id}"]`,
+          "click"
+        );
+        statusesManager.loadStatuses(newBoard.id)
+  }
 });
 

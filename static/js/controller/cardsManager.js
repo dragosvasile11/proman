@@ -69,18 +69,20 @@ function deleteButtonHandler(clickEvent) {}
 function addNewCard () {
 
   addEventListener('click', async(event) => {
-    if (event.target.className === 'board-add-button') {
+    if (event.target.id === 'new-card') {
       let boardId = event.target.parentElement.getAttribute('data-board-id');
       let newCard = await dataHandler.createNewCard("new-card", boardId, 1);
-      if (document.querySelector(`.board-columns[data-board-id="${boardId}"]`).hasChildNodes()) {
-        const cardBuilder = htmlFactory(htmlTemplates.newCard);
-            const content = cardBuilder(newCard);
-            domManager.addChild(`.board-column-content[data-status-id="${newCard.card_order}"][data-board-id="${newCard.board_id}"]`, content);
-            domManager.addEventListener(
-              `.card[data-card-id="${newCard.id}"]`,
-              "click",
-              deleteButtonHandler
-            );
+      if (!('status' in newCard)) {
+        if (document.querySelector(`.board-columns[data-board-id="${boardId}"]`).hasChildNodes()) {
+          const cardBuilder = htmlFactory(htmlTemplates.newCard);
+              const content = cardBuilder(newCard);
+              domManager.addChild(`.board-column-content[data-status-id="${newCard.card_order}"][data-board-id="${newCard.board_id}"]`, content);
+              domManager.addEventListener(
+                `.card[data-card-id="${newCard.id}"]`,
+                "click",
+                deleteButtonHandler
+              );
+        }
       }
     }
   })
