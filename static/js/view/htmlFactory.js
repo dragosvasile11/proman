@@ -25,7 +25,7 @@ function boardBuilder(board) {
                         <button class="board-add-button btn btn-outline-info" type="button" id="new-card" name="new-card">+ New Card</button>
                         <button class="board-add-button btn btn-outline-info" type="button" id="new-column" name="new-card">+ New Column</button>
                     </span>
-                    <button class="board-toggle hidden" data-board-id="${board.id}"><img id="chevron" src="./static/chevronDown.png" /></button>
+                    <button class="board-toggle hidden" name="chevron" data-board-id="${board.id}"><img name="chevron" id="chevron${board.id}" data-board-id="${board.id}" src="./static/chevronDown.png" /></button>
                 </div>
                 <div class="board-columns" data-board-id="${board.id}" hidden>
                 </div>

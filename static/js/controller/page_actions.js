@@ -4,15 +4,15 @@ let defaultText = null;
 
 addEventListener('click', event => {
 
-    if (event.target.className === 'board-toggle hidden') {
+    if (event.target.name === 'chevron') {
         let boardId = event.target.dataset.boardId;
         let boardContent = document.querySelector(`.board-columns[data-board-id="${boardId}"]`)
         if (boardContent.hidden === true) {
             boardContent.hidden = false;
-            event.target.children[0].src = "./static/chevronUp.png"
+            document.querySelector(`#chevron${boardId}`).src = "./static/chevronUp.png"
         }else {
             boardContent.hidden = true;
-            event.target.children[0].src = "./static/chevronDown.png"
+            document.querySelector(`#chevron${boardId}`).src = "./static/chevronDown.png"
         }
     }
 

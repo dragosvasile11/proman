@@ -152,6 +152,7 @@ section.board{
 }
 
 
+
 .board-toggle{
     float: right;
     margin: 13px;
@@ -250,7 +251,7 @@ section.board{
 
 /* buttons */
 
-#chevron {
+button [name = "chevron"] {
     width: 20px;
 }
 
