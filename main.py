@@ -5,7 +5,7 @@ from werkzeug.security import check_password_hash
 
 from util import json_response
 import mimetypes
-import queires
+import queries
 
 import json
 
@@ -27,11 +27,11 @@ def welcome_user():
 def register_user():
     if request.method == 'POST':
         username = request.form.get('username')
-        print(queires.check_if_user_exists(username)['exists'])
-        if not (queires.check_if_user_exists(username)['exists']):
+        print(queries.check_if_user_exists(username)['exists'])
+        if not (queries.check_if_user_exists(username)['exists']):
             password = request.form.get('password')
             hashed_password = generate_password_hash(password)
-            queires.add_user(username, hashed_password)
+            queries.add_user(username, hashed_password)
             return redirect(url_for("welcome_user"))
         flash('User already exists')
 
@@ -43,13 +43,13 @@ def check_user_credentials():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        print(queires.check_if_user_exists(username)['exists'])
-        if bool(queires.check_if_user_exists(username)['exists']):
+        print(queries.check_if_user_exists(username)['exists'])
+        if bool(queries.check_if_user_exists(username)['exists']):
 
-            hashed_password = queires.get_user_password(username)["password"]
+            hashed_password = queries.get_user_password(username)["password"]
             if check_password_hash(hashed_password, password):
                 session['username'] = username
-                session['user_id'] = (queires.get_user_id(username))['id']
+                session['user_id'] = (queries.get_user_id(username))['id']
                 return redirect(url_for('welcome_user'))
             else:
                 flash('Wrong password')
@@ -66,7 +66,7 @@ def logout():
 
 @app.route('/delete_user')
 def delete_user():
-    queires.delete_user(queires.get_user_id(session['username'])['id'])
+    queries.delete_user(queries.get_user_id(session['username'])['id'])
     session.clear()
     flash('Account Deleted')
     return redirect(url_for("welcome_user"))
@@ -86,7 +86,7 @@ def get_boards():
     """
     All the boards
     """
-    return queires.get_boards()
+    return queries.get_boards()
 
 
 @app.route("/api/boards/<int:board_id>/cards/")
@@ -96,7 +96,7 @@ def get_cards_for_board(board_id: int):
     All cards that belongs to a board
     :param board_id: id of the parent board
     """
-    return queires.get_cards_for_board(board_id)
+    return queries.get_cards_for_board(board_id)
 
 
 @app.route("/api/boards/<int:board_id>/statuses/")
@@ -106,7 +106,7 @@ def get_statuses_for_board(board_id: int):
     All statuses that belongs to a board
     :param board_id: id of the parent board
     """
-    return queires.get_statuses_for_board(board_id)
+    return queries.get_statuses_for_board(board_id)
 
 
 @app.route("/api/add-board/", methods=["GET", "POST"])
@@ -117,12 +117,12 @@ def add_board():
         return {'message': 'Log in to add new board !', 'status': 201}
     
     payload = request.get_json(force=True, silent=False, cache=False)
-    user = queires.get_user_id(session["username"])
-    countBoards = str(len(queires.get_boards())+ 1)
-    board = queires.add_board(user["id"], f'{payload["title"]} {countBoards}')
+    user = queries.get_user_id(session["username"])
+    countBoards = str(len(queries.get_boards())+ 1)
+    board = queries.add_board(user["id"], f'{payload["title"]} {countBoards}')
     
     initial_statuses = ['new', 'in progress', 'testing', 'done']
-    [queires.add_status(board['id'], title) for title in initial_statuses]
+    [queries.add_status(board['id'], title) for title in initial_statuses]
     
     return board
 
@@ -135,9 +135,9 @@ def add_card():
         return {'message': 'Log in to add new card !', 'status': 201}
     
     payload = request.get_json(force=True, silent=False, cache=False)
-    countCards = str(len(queires.get_cards_for_board(payload["boardId"]))+ 1)
-    status_id = queires.get_card_status(payload["boardId"])
-    card = queires.add_card(payload["boardId"], f"{payload['title']} {countCards}", status_id['id'])
+    countCards = str(len(queries.get_cards_for_board(payload["boardId"]))+ 1)
+    status_id = queries.get_card_status(payload["boardId"])
+    card = queries.add_card(payload["boardId"], f"{payload['title']} {countCards}", status_id['id'])
     return card
 
 
@@ -149,8 +149,8 @@ def add_status():
         return {'message': 'Log in to add new card !', 'status': 201}
     
     payload = request.get_json(force=True, silent=False, cache=False)
-    countStatuses = str(len(queires.get_statuses_for_board(payload["boardId"]))+ 1)
-    status = queires.add_status(payload["boardId"], f"{payload['title']} {countStatuses}")
+    countStatuses = str(len(queries.get_statuses_for_board(payload["boardId"]))+ 1)
+    status = queries.add_status(payload["boardId"], f"{payload['title']} {countStatuses}")
     return status
 
 
@@ -162,7 +162,9 @@ def edit_content():
         return {'message': 'Log in to edit content !', 'status': 201}
     
     payload = request.get_json(force=True, silent=False, cache=False)
-    queires.edit_title(payload['board'], payload['id'], payload['content'])
+    queries.edit_title(payload['board'], payload['id'], payload['content'])
+
+
 
 
 def main():
