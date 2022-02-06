@@ -8,7 +8,7 @@ export function htmlFactory(template) {
     switch (template) {
         case htmlTemplates.board:
             return boardBuilder
-        case htmlTemplates.card: case htmlTemplates.newCard:
+        case htmlTemplates.card:
             return cardBuilder
         case htmlTemplates.status:
             return statusBuilder

@@ -26,8 +26,6 @@ def get_boards():
     Gather all boards
     :return:
     """
-    # remove this code once you implement the database
-    # return [{"title": "board1", "id": 1}, {"title": "board2", "id": 2}]
 
     return data_manager.execute_select(
         """
@@ -50,9 +48,6 @@ def get_board_title(board_id):
 
 
 def get_cards_for_board(board_id):
-    # remove this code once you implement the database
-    # return [{"title": "title1", "id": 1}, {"title": "board2", "id": 2}]
-
     matching_cards = data_manager.execute_select(
         """
         SELECT * FROM cards
@@ -66,7 +61,6 @@ def get_cards_for_board(board_id):
 
 
 def get_statuses_for_board(board_id):
-
     matching_statuses = data_manager.execute_select(
         """
         SELECT * FROM statuses

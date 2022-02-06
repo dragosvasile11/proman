@@ -86,6 +86,7 @@ def get_boards():
     """
     All the boards
     """
+    print(queries.get_boards())
     return queries.get_boards()
 
 
