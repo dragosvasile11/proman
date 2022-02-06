@@ -4,6 +4,9 @@ let initialText = null;
 
 addEventListener('click', event => {
 
+
+    // Delete elements function
+    
     if (event.target.id.includes('delete')) {
         let element = event.target.id;
         let identifier = event.target.getAttribute('dataId');
@@ -39,6 +42,9 @@ addEventListener('click', event => {
         }
     }
 
+
+    // Set board dropown and button image
+
     if (event.target.name === 'chevron') {
         let boardId = event.target.dataset.boardId;
         let boardContent = document.querySelector(`.board-columns[data-board-id="${boardId}"]`)
@@ -52,9 +58,14 @@ addEventListener('click', event => {
     }
 
 
+    // Close login/registration modal when clicked outside of it
+
     if (event.target.id === 'id01' || event.target.id === 'id02') {
         event.target.style = 'none'
     }
+
+
+    // Activate and save editable text
 
     if (event.target.isContentEditable) {
         initialText = event.target.innerHTML;
