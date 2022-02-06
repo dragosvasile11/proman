@@ -6,7 +6,7 @@ addEventListener('click', event => {
 
 
     // Delete elements function
-    
+
     if (event.target.id.includes('delete')) {
         let element = event.target.id;
         let identifier = event.target.getAttribute('dataId');
@@ -70,11 +70,11 @@ addEventListener('click', event => {
     if (event.target.isContentEditable) {
         initialText = event.target.innerHTML;
 
-        setTimeout(() => {
-            if (document.activeElement !== event.target) {
-                event.target.contentEditable = false;
-            }
-        }, 400)
+        // setTimeout(() => {
+        //     if (document.activeElement !== event.target) {
+        //         event.target.contentEditable = false;
+        //     }
+        // }, 400)
 
         event.target.addEventListener('keypress', e => {
             
