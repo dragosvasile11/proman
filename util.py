@@ -1,4 +1,4 @@
-from functools import wraps1:1
+from functools import wraps
 from flask import jsonify
 
 
