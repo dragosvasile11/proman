@@ -89,7 +89,7 @@ span.password {
 /* Design */
 
 :root{
-    --border-radius: 3px;
+    --border-radius: 5px;
     --status-1: #590000;
     --status-2: #594300;
     --status-3: #525900;
@@ -223,7 +223,7 @@ section.board{
 }
 
 .boardTitle:hover,
-.card:hover{
+.card-title:hover{
     color: rgb(70,195,249);
 }
 
@@ -239,7 +239,7 @@ section.board{
 /* ContentEditable elements */
 
 .board-column-title,
-#card-title,
+.card-title,
 .boardTitle {
     width: fit-content;
     -webkit-line-clamp: 2; 
@@ -268,5 +268,15 @@ button [name = "chevron"] {
 .card-buttons {
     margin: 8px;
     position:absolute;
-    left: 25%;
+    left: 30%;
+}
+
+.fa-trash-alt:hover {
+    color: red !important;
+}
+
+.board-column-title,
+.status-remove,
+#deleteStatus {
+    display: inline;
 }
