@@ -173,6 +173,14 @@ def delete_board():
     return {'message': 'Delete successful'}
 
 
+@app.route("/api/delete-status/", methods=["DELETE"])
+@json_response
+def delete_status():
+    payload = request.get_json(force=True, silent=False, cache=False)
+    queries.delete_status(payload['id'])
+    return {'message': 'Delete successful'}
+
+
 
 
 def main():

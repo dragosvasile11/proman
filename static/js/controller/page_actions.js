@@ -18,6 +18,15 @@ addEventListener('click', event => {
                     parent.remove()        
                 };
                 break;
+            case 'deleteStatus':
+                if (dataHandler.deleteStatus(identifier)) {
+                    let parent = document.querySelector(`[data-status-id="${identifier}"]`);
+                    while (parent.firstChild) {
+                        parent.firstChild.remove()
+                    }
+                    parent.remove()
+                }
+                break;
     if (event.target.name === 'chevron') {
         let boardId = event.target.dataset.boardId;
         let boardContent = document.querySelector(`.board-columns[data-board-id="${boardId}"]`)

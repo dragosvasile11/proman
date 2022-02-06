@@ -198,3 +198,14 @@ def delete_board(id):
     )
 
 
+def delete_status(id):
+    return data_manager.execute_select(
+        f'''
+        DELETE FROM cards
+            WHERE status_id = {id};
+        DELETE FROM statuses
+            WHERE id = {id};
+        ''',
+        select=False
+    )
+
