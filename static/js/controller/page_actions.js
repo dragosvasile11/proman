@@ -63,19 +63,14 @@ addEventListener('click', async event => {
     if (event.target.id === 'id01' || event.target.id === 'id02') {
         event.target.style = 'none'
     }
-
+    
 
     // Activate and save editable text
-
+    
     if (event.target.isContentEditable) {
+        let element = event.target;
         initialText = event.target.innerHTML;
-
-        // setTimeout(() => {
-        //     if (document.activeElement !== event.target) {
-        //         event.target.contentEditable = false;
-        //     }
-        // }, 400)
-
+    
         event.target.addEventListener('keypress', e => {
             
             if (e.key === 'Enter') {
@@ -101,10 +96,9 @@ addEventListener('click', async event => {
                 }
             }
         })
-        event.target.addEventListener('blur', e => {
-            if (event.target.isContentEditable) {
-                event.target.innerHTML = initialText;
-                // event.target.contentEditable = false
+        element.addEventListener('blur', e => {
+            if (element.isContentEditable) {
+                element.innerHTML = initialText;
             }
         })
     }
