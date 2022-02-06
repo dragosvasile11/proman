@@ -103,7 +103,7 @@ body{
 }
 
 h1, .board-title, .board-column-title{
-    font-weight: 100;
+    font-weight: 200;
 }
 
 h1{
@@ -185,6 +185,7 @@ section.board{
 }
 
 .card{
+    display:block;
     position: relative;
     background: #222;
     color: #fff;
@@ -266,8 +267,9 @@ button [name = "chevron"] {
 }
 
 .card-buttons {
+    display: inline;
     margin: 8px;
-    position:absolute;
+    position: absolute;
     left: 30%;
 }
 
@@ -275,8 +277,6 @@ button [name = "chevron"] {
     color: red !important;
 }
 
-.board-column-title,
-.status-remove,
-#deleteStatus {
-    display: inline;
+span .card-title {
+    color: red;
 }

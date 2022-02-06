@@ -19,13 +19,6 @@ export let cardsManager = {
     for (let card of cards) {
       const cardBuilder = htmlFactory(htmlTemplates.card);
       const content = cardBuilder(card);
-      // console.log(content + " cum vine data card")
-
-      // const columns = document.getElementsByClassName("board-column-content");
-      // for (let column of columns) {
-      //   column.setAttribute("data-board-id", boardId);
-      //   console.log("imi ia column => " + column + " si adauga " + boardId)
-      // }
 
       domManager.addChild(`.board-column-content[data-status-id="${card.status_id}"][data-board-id="${card.board_id}"]`, content);
       domManager.addEventListener(
