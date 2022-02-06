@@ -1,6 +1,6 @@
 import { dataHandler } from "../data/dataHandler.js";
 
-let defaultText = null;
+let initialText = null;
 
 addEventListener('click', event => {
 
@@ -57,6 +57,7 @@ addEventListener('click', event => {
     }
 
     if (event.target.isContentEditable) {
+        initialText = event.target.innerHTML;
 
         setTimeout(() => {
             if (document.activeElement !== event.target) {
