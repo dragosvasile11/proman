@@ -57,12 +57,18 @@ addEventListener('click', event => {
     }
 
     if (event.target.isContentEditable) {
-        defaultText = event.target.innerHTML
+
+        setTimeout(() => {
+            if (document.activeElement !== event.target) {
+                event.target.contentEditable = false;
+            }
+        }, 400)
 
         event.target.addEventListener('blur', e => {
-
-            if (event.target.innerHTML == '' || event.target.innerHTML === defaultText) {
-                event.target.innerHTML = defaultText
+            
+            event.target.contentEditable = false
+            if (event.target.innerHTML == '' || event.target.innerHTML === initialText) {
+                event.target.innerHTML = initialText
                 return
             }
             let newText = event.target.innerHTML;
