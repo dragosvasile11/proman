@@ -5,7 +5,7 @@
 /* Navbar */
 
 #navbarSupportedContent :hover {
-  color: rgb(232,158,16);
+  color: rgb(70,195,249);
 }
 
 .flashes {
@@ -14,9 +14,10 @@
     padding-top: 50px;
 }
 
+
 #navbar {
     font-size: large;
-    font-weight:500;
+    font-weight:600;
     padding-bottom: 20px;
 }
 
@@ -63,7 +64,7 @@ span.password {
 
   background-color: rgb(33,37,41);
   margin: 5% auto 15% auto;
-  border: 3px solid rgb(232,158,16);
+  border: 3px solid rgb(70,195,249);
   width: 35%;
   top: 20%;
   color: white
@@ -88,7 +89,7 @@ span.password {
 /* Design */
 
 :root{
-    --border-radius: 3px;
+    --border-radius: 5px;
     --status-1: #590000;
     --status-2: #594300;
     --status-3: #525900;
@@ -119,6 +120,7 @@ button{
     font-size: 14px;
     font-family: sans-serif;
     padding: 4px 10px;
+    border-radius: 4px;
 }
 
 #root{
@@ -134,9 +136,10 @@ section.board{
 }
 
 .board-header{
-    height: 50px;
+    height: 55px;
     background: #fff;
     border-radius: var(--border-radius) var(--border-radius) 0 0;
+    align-items: center;
 }
 
 .board-title{
@@ -147,6 +150,8 @@ section.board{
 .board-title, .board-add, .board-toggle{
     display: inline-block;
 }
+
+
 
 .board-toggle{
     float: right;
@@ -217,28 +222,61 @@ section.board{
     padding-right: 16px;
 }
 
+.boardTitle:hover,
+.card-title:hover{
+    color: rgb(70,195,249);
+}
+
 /* Second header */
 
 #new-board {
+    color: rgb(155,157,158);
     position: relative;
-    left: 80%;
+    left: 20%;
     display: inline-block;
 }
-
-.title {
-    position: relative;
-    display: inline-block;
-    left: 10%;
-}
-
 
 /* ContentEditable elements */
 
-#card-title,
-#board-title {
+.board-column-title,
+.card-title,
+.boardTitle {
     width: fit-content;
-    -webkit-line-clamp: 1; 
+    -webkit-line-clamp: 2; 
     overflow: hidden; 
     text-overflow: ellipsis; 
     display: -webkit-box;
+}
+
+
+/* buttons */
+
+button [name = "chevron"] {
+    width: 20px;
+}
+
+.title-image {
+    position:absolute;
+    right: 43%;
+}
+
+.btn:focus:not(:focus-visible) {
+    outline: 0;
+    box-shadow: none;
+}
+
+.card-buttons {
+    margin: 8px;
+    position:absolute;
+    left: 30%;
+}
+
+.fa-trash-alt:hover {
+    color: red !important;
+}
+
+.board-column-title,
+.status-remove,
+#deleteStatus {
+    display: inline;
 }

@@ -8,9 +8,9 @@ export let dataHandler = {
     const response = await apiGet(`/api/boards/${boardId}/`);
     return response
   },
-  getStatuses: async function () {
+  getStatusesByBoardId: async function (boardId) {
     // the statuses are retrieved and then the callback function is called with the statuses
-      const response = await apiGet("/api/statuses");
+      const response = await apiGet(`/api/boards/${boardId}/statuses/`);
       return response;
   },
   getStatus: async function (statusId) {
@@ -30,8 +30,34 @@ export let dataHandler = {
   },
   createNewCard: async function (cardTitle, boardId, statusId) {
     // creates new card, saves it and calls the callback function with its data
-
+    const response = await apiPost("/api/add-card/", { "title": cardTitle, 'boardId': boardId, 'statusId': statusId});
+      return response
   },
+  createNewStatus: async function (cardTitle, boardId) {
+    // creates new card, saves it and calls the callback function with its data
+    const response = await apiPost("/api/add-status/", { "title": cardTitle, 'boardId': boardId});
+      return response
+  },
+  editContent: async function (element, identifier, content) {
+    // creates new card, saves it and calls the callback function with its data
+    const response = await apiPut("/api/update-content/", { "board": element, 'id': identifier, 'content': content});
+      return response
+  },
+  deleteBoard: async function (identifier) {
+    // creates new card, saves it and calls the callback function with its data
+    const response = await apiDelete("/api/delete-board/", {'id': identifier});
+      return response
+  },
+  deleteStatus: async function (identifier) {
+    // creates new card, saves it and calls the callback function with its data
+    const response = await apiDelete("/api/delete-status/", {'id': identifier});
+      return response
+  },
+  deleteCard: async function (identifier) {
+    // creates new card, saves it and calls the callback function with its data
+    const response = await apiDelete("/api/delete-card/", {'id': identifier});
+      return response
+  }
 };
 
 async function apiGet(url) {
@@ -53,12 +79,33 @@ async function apiPost(url, payload) {
 
     if (request.ok) {
         const response = await request.json();
+        if (response.status === 201) {
+          alert(response.message)
+        }
         return response;
     } else {
         alert(`There was an error during creating new board ${payload}`);
     }
 }
 
-async function apiDelete(url) {}
+async function apiDelete(url, payload) {
+  const request = await fetch(url, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
 
-async function apiPut(url) {}
+  if (request.ok) {
+    const response = await request.json();
+    console.log(response.message)
+    return response
+  }
+}
+
+async function apiPut(url, payload) {
+  const request = await fetch(url, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+}
