@@ -8,6 +8,7 @@ export let statusesManager = {
         for (let status of statuses) {
             const statusBuilder = htmlFactory(htmlTemplates.status);
             const content = statusBuilder(status, boardId);
+            // console.log(content + " statuses")
             domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content, "beforeend");
         }
     }

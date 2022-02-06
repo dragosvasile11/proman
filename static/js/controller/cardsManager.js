@@ -24,16 +24,11 @@ const game = {
 
 export let cardsManager = {
   loadCards: async function (boardId) {
+
     const cards = await dataHandler.getCardsByBoardId(boardId);
     for (let card of cards) {
       const cardBuilder = htmlFactory(htmlTemplates.card);
       const content = cardBuilder(card);
-
-
-      const columns = document.getElementsByClassName("board-column-content");
-      for (let column of columns) {
-        column.setAttribute("data-board-id", boardId);
-      }
 
       domManager.addChild(`.board-column-content[data-status-id="${card.status_id}"][data-board-id="${card.board_id}"]`, content);
       domManager.addEventListener(
@@ -41,11 +36,6 @@ export let cardsManager = {
           "click",
           deleteButtonHandler
       );
-
-      //   domManager.addEventListener(
-      //       `.board-column-content[data-status-id="${card.card_order}"][data-board-id="${card.board_id}"]`,
-      //       "dragstart", handleDragStart)
-
     }
   },
   initDragAndDrop: function () {
@@ -69,8 +59,6 @@ function initElements() {
   ui.slots.forEach(function (slot) {
       slot.setAttribute("droppable", true);
   })
-  console.log(ui.cards);
-  console.log(ui.slots);
 }
 
 function initDragEvents() {
@@ -147,7 +135,7 @@ function addNewCard () {
       let newCard = await dataHandler.createNewCard("new-card", boardId, 1);
       if (!('status' in newCard)) {
         if (document.querySelector(`.board-columns[data-board-id="${boardId}"]`).hasChildNodes()) {
-          const cardBuilder = htmlFactory(htmlTemplates.newCard);
+          const cardBuilder = htmlFactory(htmlTemplates.card);
               const content = cardBuilder(newCard);
               domManager.addChild(`.board-column-content[data-status-id="${newCard.status_id}"][data-board-id="${newCard.board_id}"]`, content);
               domManager.addEventListener(
