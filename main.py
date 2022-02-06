@@ -165,6 +165,14 @@ def edit_content():
     queries.edit_title(payload['board'], payload['id'], payload['content'])
 
 
+@app.route("/api/delete-board/", methods=["DELETE"])
+@json_response
+def delete_board():
+    payload = request.get_json(force=True, silent=False, cache=False)
+    queries.delete_board(payload['id'])
+    return {'message': 'Delete successful'}
+
+
 
 
 def main():

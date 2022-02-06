@@ -182,3 +182,19 @@ def edit_title(table, id, content):
         '''
         ,select=False
     )
+    
+
+def delete_board(id):
+    return data_manager.execute_select(
+        f'''
+        DELETE FROM cards
+            WHERE board_id = {id};
+        DELETE FROM statuses
+            WHERE board_id = {id};
+        DELETE FROM boards
+            WHERE id = {id};
+        ''',
+        select=False
+    )
+
+

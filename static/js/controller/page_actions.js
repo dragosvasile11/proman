@@ -4,6 +4,20 @@ let defaultText = null;
 
 addEventListener('click', event => {
 
+    if (event.target.id.includes('delete')) {
+        let element = event.target.id;
+        let identifier = event.target.getAttribute('dataId');
+
+        switch (element) {
+            case 'deleteBoard':
+                if (dataHandler.deleteBoard(identifier)) {
+                    let parent = document.querySelector(`[section-board-id="${identifier}"]`);
+                    while (parent.firstChild) {
+                        parent.firstChild.remove()
+                    }
+                    parent.remove()        
+                };
+                break;
     if (event.target.name === 'chevron') {
         let boardId = event.target.dataset.boardId;
         let boardContent = document.querySelector(`.board-columns[data-board-id="${boardId}"]`)

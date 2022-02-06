@@ -43,6 +43,11 @@ export let dataHandler = {
     const response = await apiPut("/api/update-content/", { "board": element, 'id': identifier, 'content': content});
       return response
   },
+  deleteBoard: async function (identifier) {
+    // creates new card, saves it and calls the callback function with its data
+    const response = await apiDelete("/api/delete-board/", {'id': identifier});
+      return response
+  },
 };
 
 async function apiGet(url) {
