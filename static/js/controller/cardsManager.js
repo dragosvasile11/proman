@@ -90,9 +90,9 @@ function initDraggable(draggable) {
 }
 
 function initDropzone(dropzone) {
-    // dropzone.addEventListener("dragenter", handleDragEnter);
-    // dropzone.addEventListener("dragover", handleDragOver);
-    // dropzone.addEventListener("dragleave", handleDragLeave);
+    dropzone.addEventListener("dragenter", handleDragEnter);
+    dropzone.addEventListener("dragover", handleDragOver);
+    dropzone.addEventListener("dragleave", handleDragLeave);
     dropzone.addEventListener("drop", handleDrop);
 }
 
@@ -107,23 +107,33 @@ function handleDragEnd() {
     game.dragged = null;
 }
 
+function handleDragEnter(e) {
+    console.log("Drag enter of", e.currentTarget);
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+
+    const dropzone = e.currentTarget;
+    dropzone.style.opacity = "0.5";
+
+}
+
+function handleDragLeave(event) {
+    console.log("Drag leave of", event.currentTarget);
+    const dropzone = event.currentTarget;
+    dropzone.style.opacity = null;
+}
+
 function handleDrop(event) {
     event.preventDefault();
     const dropzone = event.currentTarget;
-    // dropzone.style.border = null;
-    // console.log("Drop of", dropzone);
-    // const image = game.dragged.firstChild;
-    // const alt = image.getAttribute("alt")
-    // const slotsParent = dropzone.parentElement;
-    // const container = slotsParent.parentElement;
-    // const containerName = container.getAttribute("class");
+    dropzone.style.opacity = null;
+    console.log("Drop of", dropzone);
 
-    if (dom.hasClass(dropzone, "card-slot")) {
-        if (dom.isEmpty(dropzone)) {
-            dropzone.appendChild(game.dragged);
-        }
+    if (dom.hasClass(dropzone, "board-column-content")) {
+        dropzone.appendChild(game.dragged);
     }
-
 }
 
 
