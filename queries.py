@@ -209,3 +209,12 @@ def delete_status(id):
         select=False
     )
 
+
+def delete_card(id):
+    return data_manager.execute_select(
+        f'''
+        DELETE FROM cards
+            WHERE id = {id};
+        ''',
+        select=False
+    )

@@ -181,6 +181,13 @@ def delete_status():
     return {'message': 'Delete successful'}
 
 
+@app.route("/api/delete-card/", methods=["DELETE"])
+@json_response
+def delete_card():
+    payload = request.get_json(force=True, silent=False, cache=False)
+    queries.delete_card(payload['id'])
+    return {'message': 'Delete successful'}
+
 
 
 def main():

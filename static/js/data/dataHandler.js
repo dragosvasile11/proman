@@ -53,6 +53,11 @@ export let dataHandler = {
     const response = await apiDelete("/api/delete-status/", {'id': identifier});
       return response
   },
+  deleteCard: async function (identifier) {
+    // creates new card, saves it and calls the callback function with its data
+    const response = await apiDelete("/api/delete-card/", {'id': identifier});
+      return response
+  }
 };
 
 async function apiGet(url) {
