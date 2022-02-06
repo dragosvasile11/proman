@@ -30,14 +30,16 @@ function showHideButtonHandler(clickEvent) {
 
   const boardId = clickEvent.target.dataset.boardId;
   const statusPromise = new Promise((resolve, reject) => {
-    resolve(statusesManager.loadStatuses(boardId))
+    resolve(statusesManager.loadStatuses(boardId));
   })
-  statusPromise.then(values => {
-      console.log(statusPromise)
-      console.log(values)
-      cardsManager.loadCards(boardId);
+  statusPromise.then( () => {
+      const cardsPromise = new Promise((resolve, reject) => {
+        resolve(cardsManager.loadCards(boardId));
+      })
+      cardsPromise.then( () => {
+        cardsManager.initDragAndDrop();
+      })
   })
-
 }
 
 
