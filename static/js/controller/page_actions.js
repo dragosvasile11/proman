@@ -76,26 +76,35 @@ addEventListener('click', event => {
             }
         }, 400)
 
-        event.target.addEventListener('blur', e => {
+        event.target.addEventListener('keypress', e => {
             
-            event.target.contentEditable = false
-            if (event.target.innerHTML == '' || event.target.innerHTML === initialText) {
-                event.target.innerHTML = initialText
-                return
+            if (e.key === 'Enter') {
+                event.target.contentEditable = false
+                event.target.contentEditable = true
+                if (event.target.innerHTML == '' || event.target.innerHTML === initialText) {
+                    event.target.innerHTML = initialText;
+                    return
+                }
+                let newText = event.target.innerHTML;
+                let elementId = event.target.id;
+                switch (event.target.className) {
+                    case 'boardTitle':
+                        let table = `boards`
+                        dataHandler.editContent(table, elementId, newText);
+                        break;
+                    case 'card-title':
+                        dataHandler.editContent('cards', elementId, newText);
+                        break
+                    case 'board-column-title':
+                        dataHandler.editContent('statuses', elementId, newText);
+                        break
+                }
             }
-            let newText = event.target.innerHTML;
-            let elementId = event.target.id;
-            switch (event.target.className) {
-                case 'boardTitle':
-                    let table = `boards`
-                    dataHandler.editContent(table, elementId, newText);
-                    break;
-                case 'card-title':
-                    dataHandler.editContent('cards', elementId, newText);
-                    break
-                case 'board-column-title':
-                    dataHandler.editContent('statuses', elementId, newText);
-                    break
+        })
+        event.target.addEventListener('blur', e => {
+            if (event.target.isContentEditable) {
+                event.target.innerHTML = initialText;
+                // event.target.contentEditable = false
             }
         })
     }
