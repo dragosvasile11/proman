@@ -113,7 +113,6 @@ function handleDragEnter(e) {
 
 function handleDragOver(e) {
     e.preventDefault();
-
     const dropzone = e.currentTarget;
     dropzone.style.opacity = "0.5";
 
