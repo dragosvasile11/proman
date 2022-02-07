@@ -190,7 +190,6 @@ def delete_card():
     return {'message': 'Delete successful'}
 
 
-
 def main():
     app.run(debug=True)
 

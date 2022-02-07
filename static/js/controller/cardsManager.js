@@ -86,11 +86,10 @@ function initDropzone(dropzone) {
 
 function handleDragStart(event) {
     game.dragged = event.currentTarget;
-    console.log("Drag start of", game.dragged);
 }
 
 function handleDragEnd() {
-    console.log("Drag end of", game.dragged);
+
     game.dragged.style.opacity = "1";
     game.dragged = null;
 }
@@ -107,7 +106,6 @@ function handleDragOver(e) {
 }
 
 function handleDragLeave(event) {
-    console.log("Drag leave of", event.currentTarget);
     const dropzone = event.currentTarget;
     dropzone.style.opacity = null;
 }
@@ -116,7 +114,6 @@ function handleDrop(event) {
     event.preventDefault();
     const dropzone = event.currentTarget;
     dropzone.style.opacity = null;
-    console.log("Drop of", dropzone);
 
     if (dom.hasClass(dropzone, "board-column-content")) {
         dropzone.appendChild(game.dragged);
