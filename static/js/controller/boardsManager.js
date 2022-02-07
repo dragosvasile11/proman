@@ -36,6 +36,7 @@ newBoardButton.addEventListener("click", async function() {
           "click"
         );
         statusesManager.loadStatuses(newBoard.id)
+            .then(() => cardsManager.initDragAndDrop())
   }
 });
 
