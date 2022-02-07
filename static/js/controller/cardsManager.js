@@ -50,14 +50,6 @@ addNewCard ()
 function initElements() {
   ui.cards = document.querySelectorAll(".card");
   ui.slots = document.querySelectorAll(".board-column-content");
-
-  ui.cards.forEach(function (card) {
-    card.setAttribute("draggable", true);
-  });
-
-  // ui.slots.forEach(function (slot) {
-  //     slot.setAttribute("droppable", true);
-  // })
 }
 
 function initDragEvents() {
