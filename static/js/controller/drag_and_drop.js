@@ -67,14 +67,6 @@ function handleDragOver(event) {
             dropzone.insertBefore(ui.dragged, afterElement);
         }
 
-        for (let i=0; i<dropzone.children.length; i++) {
-            dropzone.children[i].setAttribute("data-card-order", `${i+1}`);
-
-            dataHandler.updateCards(dropzone.children[i].getAttribute("data-card-id"),
-                                    dropzone.getAttribute("data-status-id"),
-                                    dropzone.children[i].getAttribute("data-card-order"))
-        }
-
         function getDragAfterElement(container, y) {
             const draggableElements = [...container.querySelectorAll(".card:not(.dragging-now)")];
             return draggableElements.reduce((closest, child) => {
@@ -100,5 +92,13 @@ function handleDrop(event) {
     event.preventDefault();
     const dropzone = event.currentTarget;
     dropzone.style.opacity = null;
+
+    for (let i=0; i<dropzone.children.length; i++) {
+        dropzone.children[i].setAttribute("data-card-order", `${i+1}`);
+
+        dataHandler.updateCards(dropzone.children[i].getAttribute("data-card-id"),
+                                dropzone.getAttribute("data-status-id"),
+                                dropzone.children[i].getAttribute("data-card-order"))
+    }
 
 }
