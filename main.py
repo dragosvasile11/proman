@@ -193,13 +193,20 @@ def delete_status():
 @app.route("/api/delete-card/", methods=["DELETE"])
 @json_response
 def delete_card():
-    
     if 'username' not in session:
         return {'message': 'Log in to edit content !', 'status': 201, 'delete': False}
     
     payload = request.get_json(force=True, silent=False, cache=False)
     queries.delete_card(payload['id'])
     return {'message': 'Delete successful', 'delete': True}
+
+
+@app.route("/api/update-cards/", methods=["PUT"])
+@json_response
+def update_cards():
+    payload = request.get_json(force=True, silent=False, cache=False)
+    print(payload)
+    queries.update_cards(payload["id"], payload["statusId"], payload["cardOrder"])
 
 
 def main():
