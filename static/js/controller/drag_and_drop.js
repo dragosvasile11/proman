@@ -1,3 +1,5 @@
+import { dataHandler } from "../data/dataHandler.js";
+
 const ui = {
   slots: null,
   cards: null,
