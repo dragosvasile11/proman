@@ -1,6 +1,7 @@
 import { dataHandler } from "../data/dataHandler.js";
 import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
+import { initDragAndDrop } from "./drag_and_drop.js";
 
 export let statusesManager = {
     loadStatuses: async function (boardId) {
@@ -26,6 +27,7 @@ function addNewColumn () {
             const statusBuilder = htmlFactory(htmlTemplates.status);
                 const content = statusBuilder(newStatus, boardId);
                 domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content, "beforeend");
+                initDragAndDrop();
           }
         }
       }
