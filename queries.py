@@ -52,7 +52,7 @@ def get_cards_for_board(board_id):
         """
         SELECT * FROM cards
         WHERE cards.board_id = %(board_id)s
-        ORDER BY id
+        ORDER BY card_order DESC
         ;
         """
         , {"board_id": board_id})
@@ -211,4 +211,16 @@ def delete_card(id):
             WHERE id = {id};
         ''',
         select=False
+    )
+
+
+def update_cards(id, status_id, card_order):
+    return data_manager.execute_select(
+        f'''
+        UPDATE cards
+            SET status_id = '{status_id}',
+                card_order = '{card_order}'
+        WHERE id = {id};
+        '''
+        , select=False
     )

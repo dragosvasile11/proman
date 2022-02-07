@@ -39,6 +39,7 @@ function addNewCard () {
           const cardBuilder = htmlFactory(htmlTemplates.card);
               const content = cardBuilder(newCard);
               domManager.addChild(`.board-column-content[data-status-id="${newCard.status_id}"][data-board-id="${newCard.board_id}"]`, content);
+
               domManager.addEventListener(
                 `.card[data-card-id="${newCard.id}"]`,
                 "click",
