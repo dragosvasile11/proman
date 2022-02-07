@@ -44,7 +44,6 @@ export let cardsManager = {
   },
 }
 
-
 addNewCard ()
 
 
@@ -56,9 +55,9 @@ function initElements() {
     card.setAttribute("draggable", true);
   });
 
-  ui.slots.forEach(function (slot) {
-      slot.setAttribute("droppable", true);
-  })
+  // ui.slots.forEach(function (slot) {
+  //     slot.setAttribute("droppable", true);
+  // })
 }
 
 function initDragEvents() {
@@ -86,11 +85,12 @@ function initDropzone(dropzone) {
 
 function handleDragStart(event) {
     game.dragged = event.currentTarget;
+    game.dragged.classList.add("dragging-now")
 }
 
 function handleDragEnd() {
-
     game.dragged.style.opacity = "1";
+    game.dragged.classList.remove("dragging-now");
     game.dragged = null;
 }
 
@@ -98,11 +98,31 @@ function handleDragEnter(e) {
     console.log("Drag enter of", e.currentTarget);
 }
 
-function handleDragOver(e) {
-    e.preventDefault();
-    const dropzone = e.currentTarget;
+function handleDragOver(event) {
+    event.preventDefault();
+    const dropzone = event.currentTarget;
     dropzone.style.opacity = "0.5";
+    const afterElement = getDragAfterElement(dropzone, event.clientY);
 
+    if (!afterElement) {
+        dropzone.appendChild(game.dragged);
+    } else {
+        dropzone.insertBefore(game.dragged, afterElement);
+    }
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll(".card:not(.dragging-now)")];
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }
+        ).element;
+    }
 }
 
 function handleDragLeave(event) {
@@ -115,17 +135,11 @@ function handleDrop(event) {
     const dropzone = event.currentTarget;
     dropzone.style.opacity = null;
 
-    if (dom.hasClass(dropzone, "board-column-content")) {
-        dropzone.appendChild(game.dragged);
-    }
 }
-
 
 function deleteButtonHandler(clickEvent) {}
 
-
 function addNewCard () {
-
   addEventListener('click', async(event) => {
     if (event.target.id === 'new-card') {
       let boardId = event.target.parentElement.parentElement.getAttribute('data-board-id');
