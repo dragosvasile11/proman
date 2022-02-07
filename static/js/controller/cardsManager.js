@@ -45,6 +45,7 @@ function addNewCard () {
                 deleteButtonHandler
               );
               initDragAndDrop();
+
         }
       }
     }

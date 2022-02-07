@@ -57,6 +57,9 @@ export let dataHandler = {
     // creates new card, saves it and calls the callback function with its data
     const response = await apiDelete("/api/delete-card/", {'id': identifier});
       return response
+  },
+  updateCards: async function () {
+
   }
 };
 
