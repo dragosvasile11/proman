@@ -151,6 +151,8 @@ def add_status():
     
     payload = request.get_json(force=True, silent=False, cache=False)
     countStatuses = str(len(queries.get_statuses_for_board(payload["boardId"]))+ 1)
+    if int(countStatuses) > 7:
+        return {'message': 'Maximum columns reached', 'status': 201}
     status = queries.add_status(payload["boardId"], f"{payload['title']} {countStatuses}")
     return status
 
