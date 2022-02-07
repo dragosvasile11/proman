@@ -8,10 +8,6 @@ const ui = {
   dragged: null
 };
 
-const game = {
-    dragged: null,
-};
-
 
 export let cardsManager = {
   loadCards: async function (boardId) {
@@ -67,14 +63,14 @@ function initDropzone(dropzone) {
 }
 
 function handleDragStart(event) {
-    game.dragged = event.currentTarget;
-    game.dragged.classList.add("dragging-now")
+    ui.dragged = event.currentTarget;
+    ui.dragged.classList.add("dragging-now")
 }
 
 function handleDragEnd() {
-    game.dragged.style.opacity = "1";
-    game.dragged.classList.remove("dragging-now");
-    game.dragged = null;
+    ui.dragged.style.opacity = "1";
+    ui.dragged.classList.remove("dragging-now");
+    ui.dragged = null;
 }
 
 function handleDragEnter(e) {
@@ -88,9 +84,9 @@ function handleDragOver(event) {
     const afterElement = getDragAfterElement(dropzone, event.clientY);
 
     if (!afterElement) {
-        dropzone.appendChild(game.dragged);
+        dropzone.appendChild(ui.dragged);
     } else {
-        dropzone.insertBefore(game.dragged, afterElement);
+        dropzone.insertBefore(ui.dragged, afterElement);
     }
 
     function getDragAfterElement(container, y) {
