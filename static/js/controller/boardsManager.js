@@ -3,7 +3,7 @@ import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 import { cardsManager } from "./cardsManager.js";
 import { statusesManager } from "./statusesManager.js";
-
+import { initDragAndDrop } from "./drag_and_drop.js";
 
 export let boardsManager = {
   loadBoards: async function () {
@@ -17,8 +17,8 @@ export let boardsManager = {
         "click"
       );
       statusesManager.loadStatuses(board.id)
-          .then(value => cardsManager.loadCards(board.id)
-              .then(() => cardsManager.initDragAndDrop()))
+          .then(() => cardsManager.loadCards(board.id)
+              .then(() => initDragAndDrop()))
     }
   },
 };
@@ -36,6 +36,7 @@ newBoardButton.addEventListener("click", async function() {
           "click"
         );
         statusesManager.loadStatuses(newBoard.id)
+            .then(() => initDragAndDrop())
   }
 });
 
