@@ -97,8 +97,11 @@ async function apiDelete(url, payload) {
 
   if (request.ok) {
     const response = await request.json();
+      if (response.status === 201) {
+        alert(response.message)
+      }
     console.log(response.message)
-    return response
+    return response.delete
   }
 }
 

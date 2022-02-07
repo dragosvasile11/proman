@@ -169,25 +169,37 @@ def edit_content():
 @app.route("/api/delete-board/", methods=["DELETE"])
 @json_response
 def delete_board():
+    
+    if 'username' not in session:
+        return {'message': 'Log in to edit content !', 'status': 201, 'delete': 0}
+    
     payload = request.get_json(force=True, silent=False, cache=False)
     queries.delete_board(payload['id'])
-    return {'message': 'Delete successful'}
+    return {'message': 'Delete successful', 'delete': True}
 
 
 @app.route("/api/delete-status/", methods=["DELETE"])
 @json_response
 def delete_status():
+    
+    if 'username' not in session:
+        return {'message': 'Log in to edit content !', 'status': 201, 'delete': False}
+    
     payload = request.get_json(force=True, silent=False, cache=False)
     queries.delete_status(payload['id'])
-    return {'message': 'Delete successful'}
+    return {'message': 'Delete successful', 'delete': True}
 
 
 @app.route("/api/delete-card/", methods=["DELETE"])
 @json_response
 def delete_card():
+    
+    if 'username' not in session:
+        return {'message': 'Log in to edit content !', 'status': 201, 'delete': False}
+    
     payload = request.get_json(force=True, silent=False, cache=False)
     queries.delete_card(payload['id'])
-    return {'message': 'Delete successful'}
+    return {'message': 'Delete successful', 'delete': True}
 
 
 def main():

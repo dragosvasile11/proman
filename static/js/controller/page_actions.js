@@ -2,7 +2,7 @@ import { dataHandler } from "../data/dataHandler.js";
 
 let initialText = null;
 
-addEventListener('click', event => {
+addEventListener('click', async event => {
 
 
     // Delete elements function
@@ -13,7 +13,7 @@ addEventListener('click', event => {
 
         switch (element) {
             case 'deleteBoard':
-                if (dataHandler.deleteBoard(identifier)) {
+                if (await dataHandler.deleteBoard(identifier)) {
                     let parent = document.querySelector(`[section-board-id="${identifier}"]`);
                     while (parent.firstChild) {
                         parent.firstChild.remove()
@@ -22,7 +22,7 @@ addEventListener('click', event => {
                 };
                 break;
             case 'deleteStatus':
-                if (dataHandler.deleteStatus(identifier)) {
+                if (await dataHandler.deleteStatus(identifier)) {
                     let parent = document.querySelector(`[data-status-id="${identifier}"]`);
                     while (parent.firstChild) {
                         parent.firstChild.remove()
@@ -31,7 +31,7 @@ addEventListener('click', event => {
                 }
                 break;
             case 'deleteCard':
-                if (dataHandler.deleteCard(identifier)) {
+                if (await dataHandler.deleteCard(identifier)) {
                     let parent = document.querySelector(`[data-card-id="${identifier}"]`);
                     while (parent.firstChild) {
                         parent.firstChild.remove()
@@ -63,19 +63,14 @@ addEventListener('click', event => {
     if (event.target.id === 'id01' || event.target.id === 'id02') {
         event.target.style = 'none'
     }
-
+    
 
     // Activate and save editable text
-
+    
     if (event.target.isContentEditable) {
+        let element = event.target;
         initialText = event.target.innerHTML;
-
-        // setTimeout(() => {
-        //     if (document.activeElement !== event.target) {
-        //         event.target.contentEditable = false;
-        //     }
-        // }, 400)
-
+    
         event.target.addEventListener('keypress', e => {
             
             if (e.key === 'Enter') {
@@ -101,10 +96,9 @@ addEventListener('click', event => {
                 }
             }
         })
-        event.target.addEventListener('blur', e => {
-            if (event.target.isContentEditable) {
-                event.target.innerHTML = initialText;
-                // event.target.contentEditable = false
+        element.addEventListener('blur', e => {
+            if (element.isContentEditable) {
+                element.innerHTML = initialText;
             }
         })
     }
