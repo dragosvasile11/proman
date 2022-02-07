@@ -90,10 +90,13 @@ span.password {
 
 :root{
     --border-radius: 5px;
-    --status-1: #590000;
-    --status-2: #594300;
-    --status-3: #525900;
-    --status-4: #085900;
+    --status-1: #9b1919;
+    --status-2: #1e1d1f;
+    --status-3: #142d9c;
+    --status-4: #5d9208;
+    --status-5: #c57907;
+    --status-6: #6b08bb;
+    --status-7: #078c91;
 }
 
 body{
@@ -210,6 +213,18 @@ section.board{
     background: var(--status-4);
 }
 
+.board-column:nth-of-type(5) .card{
+    background: var(--status-5);
+}
+
+.board-column:nth-of-type(6) .card{
+    background: var(--status-6);
+}
+
+.board-column:nth-of-type(7) .card{
+    background: var(--status-7);
+}
+
 .card-remove{
     display: block;
     position: absolute;
@@ -270,7 +285,7 @@ button [name = "chevron"] {
     display: inline !important;
     margin: 8px !important;
     position: absolute !important;
-    left: 20% !important;
+    left: 30% !important;
 }
 
 .fa-trash-alt:hover {
