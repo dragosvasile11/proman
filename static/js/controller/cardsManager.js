@@ -2,15 +2,6 @@ import { dataHandler } from "../data/dataHandler.js";
 import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 
-const dom = {
-    isEmpty: function (el) {
-        return el.children.length === 0;
-    },
-    hasClass: function (el, cls) {
-        return el.classList.contains(cls);
-    },
-};
-
 const ui = {
   slots: null,
   cards: null,
