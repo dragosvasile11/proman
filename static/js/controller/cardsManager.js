@@ -33,7 +33,6 @@ export let cardsManager = {
 
 addNewCard ()
 
-
 function initElements() {
   ui.cards = document.querySelectorAll(".card");
   ui.slots = document.querySelectorAll(".board-column-content");
@@ -80,7 +79,7 @@ function handleDragEnter(e) {
 function handleDragOver(event) {
     event.preventDefault();
     const dropzone = event.currentTarget;
-    dropzone.style.opacity = "0.5";
+    dropzone.style.opacity = "0.7";
     const afterElement = getDragAfterElement(dropzone, event.clientY);
 
     if (!afterElement) {
