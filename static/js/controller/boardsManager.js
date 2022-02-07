@@ -17,7 +17,7 @@ export let boardsManager = {
         "click"
       );
       statusesManager.loadStatuses(board.id)
-          .then(value => cardsManager.loadCards(board.id)
+          .then(() => cardsManager.loadCards(board.id)
               .then(() => cardsManager.initDragAndDrop()))
     }
   },
