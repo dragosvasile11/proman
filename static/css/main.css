@@ -267,10 +267,10 @@ button [name = "chevron"] {
 }
 
 .card-buttons {
-    display: inline;
-    margin: 8px;
-    position: absolute;
-    left: 30%;
+    display: inline !important;
+    margin: 8px !important;
+    position: absolute !important;
+    left: 20% !important;
 }
 
 .fa-trash-alt:hover {
