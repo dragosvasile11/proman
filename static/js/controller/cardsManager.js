@@ -19,6 +19,7 @@ export let cardsManager = {
           "click",
           deleteButtonHandler
       );
+      setContentEditable();
     }
   },
 }
@@ -51,4 +52,14 @@ function addNewCard () {
       }
     }
   })
+}
+
+
+function setContentEditable() {
+    if (!(JSON.parse(localStorage.getItem('userLoggedIn')))) {
+        let editableElements = document.querySelectorAll('[name="titleEdit"]');
+        editableElements.forEach(element => {
+          element.contentEditable = false;
+        });
+    }
 }
