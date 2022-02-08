@@ -102,4 +102,11 @@ addEventListener('click', async event => {
             }
         })
     }
+
+
+    // Save radio button value for board creation public/private
+
+    if (event.target.id === 'radio1' || event.target.id === 'radio2') {
+        localStorage.setItem('boardType', event.target.innerHTML);
+    }
 })

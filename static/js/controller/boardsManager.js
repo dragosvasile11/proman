@@ -30,7 +30,7 @@ export let boardsManager = {
 
 const newBoardButton = document.getElementById("new-board");
 newBoardButton.addEventListener("click", async function() {
-  let newBoard = await dataHandler.createNewBoard("new-board");
+  let newBoard = await dataHandler.createNewBoard("new-board", localStorage.getItem('boardType'));
   if (!('status' in newBoard)) {
     const boardBuilder = htmlFactory(htmlTemplates.board);
         const content = boardBuilder(newBoard);

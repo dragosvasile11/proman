@@ -123,8 +123,11 @@ def add_board():
     
     payload = request.get_json(force=True, silent=False, cache=False)
     user = queries.get_user_id(session["username"])
-    countBoards = str(len(queries.get_boards())+ 1)
-    board = queries.add_board(user["id"], f'{payload["title"]} {countBoards}')
+    countBoards = str(len(queries.get_boards(session['user_id']))+ 1)
+    
+    board_type = True if payload["boardType"] == "Public" else False
+    
+    board = queries.add_board(user["id"], f'{payload["title"]} {countBoards}', board_type)
     
     initial_statuses = ['new', 'in progress', 'testing', 'done']
     [queries.add_status(board['id'], title) for title in initial_statuses]

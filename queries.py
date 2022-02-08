@@ -22,15 +22,16 @@ def get_card_status(board_id):
     return status
 
 
-def get_boards():
+def get_boards(user_id):
     """
     Gather all boards
     :return:
     """
 
     return data_manager.execute_select(
-        """
+        f"""
         SELECT * FROM boards
+        WHERE user_id = {user_id} OR public = true
         ORDER BY id
         ;
         """
@@ -123,16 +124,17 @@ def get_user_password(username):
     return data_manager.execute_select(query, {"username": username}, fetchall=False)
 
 
-def add_board(user_id, title):
+def add_board(user_id, title, boardType):
     query = """
         INSERT INTO boards VALUES
-            (DEFAULT, %(user_id)s, %(title)s, TRUE)
+            (DEFAULT, %(user_id)s, %(title)s, %(board_type)s)
             RETURNING id, title;
         """
 
     return data_manager.execute_select(query,
                                 {"user_id": user_id,
-                                 "title": title},
+                                 "title": title,
+                                 "board_type": boardType},
                                 select=True,
                                 fetchall=False)
 
