@@ -44,11 +44,11 @@ newBoardButton.addEventListener("click", async function() {
   }
 });
 
+export function setButtonsHidden() {
 
-export function setContentEditable() {
+    if (!(JSON.parse(localStorage.getItem('userLoggedIn')))) {
 
-    if (JSON.parse(localStorage.getItem('userLoggedIn'))) {
-        const editableElements = document.querySelectorAll('[name="titleEdit"]');
-        editableElements.forEach(element => element.contentEditable = true);
+        const boardButtons = document.querySelectorAll(".board-add-button");
+        boardButtons.forEach(element => element.style.display = 'none')
     }
 }
