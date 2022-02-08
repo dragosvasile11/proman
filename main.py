@@ -31,7 +31,7 @@ def welcome_user():
 def register_user():
     if request.method == 'POST':
         username = request.form.get('username')
-        print(queries.check_if_user_exists(username)['exists'])
+        
         if not (queries.check_if_user_exists(username)['exists']):
             password = request.form.get('password')
             hashed_password = generate_password_hash(password)
@@ -47,7 +47,7 @@ def check_user_credentials():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        print(queries.check_if_user_exists(username)['exists'])
+        
         if bool(queries.check_if_user_exists(username)['exists']):
 
             hashed_password = queries.get_user_password(username)["password"]
@@ -90,8 +90,9 @@ def get_boards():
     """
     All the boards
     """
-    print(queries.get_boards())
-    return queries.get_boards()
+    if 'user_id' not in session:
+        session['user_id'] = 0
+    return queries.get_boards(session['user_id'])
 
 
 @app.route("/api/boards/<int:board_id>/cards/")
@@ -217,7 +218,6 @@ def update_cards():
         return {'message': 'Log in to move card !', 'status': 201, 'delete': False}
     
     payload = request.get_json(force=True, silent=False, cache=False)
-    print(payload)
     queries.update_cards(payload["id"], payload["statusId"], payload["cardOrder"])
 
 
