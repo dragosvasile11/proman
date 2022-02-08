@@ -51,7 +51,7 @@ function handleDragEnd() {
 }
 
 function handleDragEnter(e) {
-    console.log("Drag enter of", e.currentTarget);
+    // console.log("Drag enter of", e.currentTarget);
 }
 
 function handleDragOver(event) {
