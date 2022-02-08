@@ -18,7 +18,11 @@ export let boardsManager = {
       );
       statusesManager.loadStatuses(board.id)
           .then(() => cardsManager.loadCards(board.id)
-              .then(() => initDragAndDrop()))
+              .then(() => {
+                if (JSON.parse(localStorage.getItem('userLoggedIn'))) {
+                initDragAndDrop()
+              }
+              }))
     }
   },
 };
