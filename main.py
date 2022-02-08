@@ -15,6 +15,10 @@ app.secret_key = 'proman'
 
 load_dotenv()
 
+@app.route('/test')
+def test():
+    return 'test'
+
 
 @app.route("/", methods=['GET', 'POST'])
 def welcome_user():
