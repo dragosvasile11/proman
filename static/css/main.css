@@ -281,11 +281,9 @@ button [name = "chevron"] {
     box-shadow: none;
 }
 
-.card-buttons {
+.board-buttons {
     display: inline !important;
     margin: 8px !important;
-    position: absolute !important;
-    left: 30% !important;
 }
 
 .fa-trash-alt:hover {
@@ -294,4 +292,8 @@ button [name = "chevron"] {
 
 span .card-title {
     color: red;
+}
+
+.board-title {
+    width: 140px;
 }
