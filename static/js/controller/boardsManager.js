@@ -40,3 +40,11 @@ newBoardButton.addEventListener("click", async function() {
   }
 });
 
+
+export function setContentEditable() {
+
+    if (JSON.parse(localStorage.getItem('userLoggedIn'))) {
+        const editableElements = document.querySelectorAll('[name="titleEdit"]');
+        editableElements.forEach(element => element.contentEditable = true);
+    }
+}
