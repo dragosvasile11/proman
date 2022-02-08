@@ -11,6 +11,7 @@ def get_card_status(board_id):
         """
         SELECT * FROM statuses
         WHERE board_id = %(board_id)s
+        ORDER BY id ASC
         LIMIT 1
         ;
         """
