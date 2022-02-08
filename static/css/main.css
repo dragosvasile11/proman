@@ -264,6 +264,9 @@ section.board{
     display: -webkit-box;
 }
 
+.board-title {
+    width: 140px;
+}
 
 /* buttons */
 
