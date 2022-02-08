@@ -1,7 +1,9 @@
 import os
 import psycopg2
 import psycopg2.extras
-# postgres://kdrwhrfjykzzmx:7bde1ba6e587140a60e332232f9451bb9860158b377be94eef5dcff748e0cacd@ec2-79-125-123-149.eu-west-1.compute.amazonaws.com:5432/d918psh5mmug0f
+
+# postgres://eingrpuwcdrabw:112d3f6631a60bd1e7a0bda2b8320e05becf59253a39a5eabacb51bf6c9a6a73@ec2-52-31-219-113.eu-west-1.compute.amazonaws.com:5432/de94l46nska20p
+
 
 def establish_connection(connection_data=None):
     """
@@ -12,10 +14,13 @@ def establish_connection(connection_data=None):
     if connection_data is None:
         connection_data = get_connection_data()
     try:
-        connect_str = "dbname={} user={} host={} password={}".format(connection_data['dbname'],
-                                                                     connection_data['user'],
-                                                                     connection_data['host'],
-                                                                     connection_data['password'])
+        if os.environ.get('DATABASE_URL'):
+            connect_str = os.environ.get('DATABASE_URL')
+        else:
+            connect_str = "dbname={} user={} host={} password={}".format(connection_data['dbname'],
+                                                                        connection_data['user'],
+                                                                        connection_data['host'],
+                                                                        connection_data['password'])
         conn = psycopg2.connect(connect_str)
         conn.autocommit = True
     except psycopg2.DatabaseError as e:
