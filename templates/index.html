@@ -38,6 +38,13 @@
                                 <a class="nav-link" aria-current="page" href="{{ url_for('welcome_user') }}">Home</a>
                             </li>
                             <button type="button" class="btn btn-outline-blue" id="new-board" name="new-board" {{ "hidden" if "username" not in session }}>+ New Board</button>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group" {{ "hidden" if "username" not in session }}>
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                                <label class="btn btn-outline-info radioButton" id="radio1" for="btnradio1">Public</label>
+                              
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                                <label class="btn btn-outline-info radioButton" id="radio2" for="btnradio2">Private</label>
+                            </div>
                             <div>
                                 <img class="title-image" src="{{ url_for('static', filename='title.png') }}"/>
                             </div>
