@@ -80,8 +80,8 @@ def delete_user():
 @json_response
 def check_logged_in():
     if 'username' in session:
-        return json.loads('{"response": 1}')
-    return json.loads('{"response": 0}')
+        return {"response": True}
+    return {"response": False}
 
 
 @app.route("/api/boards")
@@ -151,7 +151,7 @@ def add_card():
 def add_status():
 
     if 'username' not in session:
-        return {'message': 'Log in to add new card !', 'status': 201}
+        return {'message': 'Log in to add new column !', 'status': 201}
     
     payload = request.get_json(force=True, silent=False, cache=False)
     countStatuses = str(len(queries.get_statuses_for_board(payload["boardId"]))+ 1)
@@ -177,7 +177,7 @@ def edit_content():
 def delete_board():
     
     if 'username' not in session:
-        return {'message': 'Log in to edit content !', 'status': 201, 'delete': 0}
+        return {'message': 'Log in to delete board !', 'status': 201, 'delete': 0}
     
     payload = request.get_json(force=True, silent=False, cache=False)
     queries.delete_board(payload['id'])
@@ -189,7 +189,7 @@ def delete_board():
 def delete_status():
     
     if 'username' not in session:
-        return {'message': 'Log in to edit content !', 'status': 201, 'delete': False}
+        return {'message': 'Log in to delete status !', 'status': 201, 'delete': False}
     
     payload = request.get_json(force=True, silent=False, cache=False)
     queries.delete_status(payload['id'])
@@ -200,7 +200,7 @@ def delete_status():
 @json_response
 def delete_card():
     if 'username' not in session:
-        return {'message': 'Log in to edit content !', 'status': 201, 'delete': False}
+        return {'message': 'Log in to delete card !', 'status': 201, 'delete': False}
     
     payload = request.get_json(force=True, silent=False, cache=False)
     queries.delete_card(payload['id'])
@@ -210,6 +210,9 @@ def delete_card():
 @app.route("/api/update-cards/", methods=["PUT"])
 @json_response
 def update_cards():
+    if 'username' not in session:
+        return {'message': 'Log in to move card !', 'status': 201, 'delete': False}
+    
     payload = request.get_json(force=True, silent=False, cache=False)
     print(payload)
     queries.update_cards(payload["id"], payload["statusId"], payload["cardOrder"])
