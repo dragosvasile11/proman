@@ -20,7 +20,7 @@
         <!-- <script src="{{ url_for('static', filename='registerSW.js') }}"></script> -->
         <script>
             if (navigator.serviceWorker) {
-                navigator.serviceWorker.register('serviceWorker.js')
+                navigator.serviceWorker.register("{{ url_for('static', filename='serviceWorker.js') }}")
             }
         </script>
 
