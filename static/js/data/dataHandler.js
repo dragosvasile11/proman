@@ -34,32 +34,26 @@ export let dataHandler = {
       return response
   },
   createNewStatus: async function (cardTitle, boardId) {
-    // creates new card, saves it and calls the callback function with its data
     const response = await apiPost("/api/add-status/", { "title": cardTitle, 'boardId': boardId});
       return response
   },
   editContent: async function (element, identifier, content) {
-    // creates new card, saves it and calls the callback function with its data
     const response = await apiPut("/api/update-content/", { "board": element, 'id': identifier, 'content': content});
       return response
   },
   deleteBoard: async function (identifier) {
-    // creates new card, saves it and calls the callback function with its data
     const response = await apiDelete("/api/delete-board/", {'id': identifier});
       return response
   },
   deleteStatus: async function (identifier) {
-    // creates new card, saves it and calls the callback function with its data
     const response = await apiDelete("/api/delete-status/", {'id': identifier});
       return response
   },
   deleteCard: async function (identifier) {
-    // creates new card, saves it and calls the callback function with its data
     const response = await apiDelete("/api/delete-card/", {'id': identifier});
       return response
   },
   updateCards: async function (cardId, statusId, cardOrder) {
-    console.log(cardId, statusId, cardOrder)
     const response = await apiPut("/api/update-cards/", { "id": cardId, "statusId": statusId, "cardOrder": cardOrder });
         return response
   }
@@ -105,7 +99,6 @@ async function apiDelete(url, payload) {
       if (response.status === 201) {
         alert(response.message)
       }
-    console.log(response.message)
     return response.delete
   }
 }

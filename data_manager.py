@@ -2,8 +2,6 @@ import os
 import psycopg2
 import psycopg2.extras
 
-# postgres://eingrpuwcdrabw:112d3f6631a60bd1e7a0bda2b8320e05becf59253a39a5eabacb51bf6c9a6a73@ec2-52-31-219-113.eu-west-1.compute.amazonaws.com:5432/de94l46nska20p
-
 
 def establish_connection(connection_data=None):
     """
