@@ -294,6 +294,20 @@ span .card-title {
     color: red;
 }
 
-.board-title {
-    width: 140px;
+.btn-group {
+    width: 50px;
+    height: 25px;
+
+}
+
+.radioButton {
+    border-color: none !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    top: 34px;
+    right: 70px;
+}
+
+.radioButton:hover {
+    color:black !important;
 }
