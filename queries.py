@@ -30,9 +30,9 @@ def get_boards(user_id):
 
     return data_manager.execute_select(
         f"""
-        SELECT * FROM boards
-        WHERE user_id = {user_id} OR public = true
-        ORDER BY id
+        SELECT boards.id, user_id, title, public, users.username FROM boards
+	        RIGHT JOIN users ON users.id = boards.user_id
+            WHERE user_id = {user_id} OR public = true
         ;
         """
     )

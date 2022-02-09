@@ -314,3 +314,12 @@ span .card-title {
 .radioButton:hover {
     color:black !important;
 }
+
+/* muted text */
+
+#created-by {
+    position: absolute;
+    padding: 20px;
+    display: inline;
+    right: 23%;
+}
