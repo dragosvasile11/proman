@@ -30,7 +30,8 @@ export let boardsManager = {
 
 const newBoardButton = document.getElementById("new-board");
 newBoardButton.addEventListener("click", async function() {
-  let newBoard = await dataHandler.createNewBoard("new-board", localStorage.getItem('boardType'));
+  let newBoardName = localStorage.getItem('boardType') === 'Private'  ? 'Private Board' : 'Public Board';
+  let newBoard = await dataHandler.createNewBoard(newBoardName);
   if (!('status' in newBoard)) {
     const boardBuilder = htmlFactory(htmlTemplates.board);
         const content = boardBuilder(newBoard);

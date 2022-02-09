@@ -71,8 +71,8 @@ INSERT INTO statuses(title, board_id) VALUES ('in progress', 2);
 INSERT INTO statuses(title, board_id) VALUES ('testing', 2);
 INSERT INTO statuses(title, board_id) VALUES ('done', 2);
 
-INSERT INTO boards(user_id, title, public) VALUES (1, 'Board 1', TRUE);
-INSERT INTO boards(user_id, title, public) VALUES (1, 'Board 2', TRUE);
+INSERT INTO boards(user_id, title, public) VALUES (1, 'Public Board 1', TRUE);
+INSERT INTO boards(user_id, title, public) VALUES (1, 'Public Board 2', TRUE);
 
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 1, 1, 'new card 1', 1);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 1, 1, 'new card 2', 2);

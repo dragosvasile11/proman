@@ -36,6 +36,30 @@ def get_boards(user_id):
         ;
         """
     )
+    
+
+def count_public_boards():
+
+    return data_manager.execute_select(
+        f"""
+        SELECT COUNT(*) FROM boards
+        WHERE public = true
+        ;
+        """,
+        fetchall=False
+    )
+    
+
+def count_private_boards(user_id):
+
+    return data_manager.execute_select(
+        f"""
+        SELECT COUNT(*) FROM boards
+        WHERE user_id = {user_id} AND public = false
+        ;
+        """,
+        fetchall=False
+    )
 
 
 def get_board_title(board_id):

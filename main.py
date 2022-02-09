@@ -15,10 +15,6 @@ app.secret_key = 'proman'
 
 load_dotenv()
 
-@app.route('/test')
-def test():
-    return 'test'
-
 
 @app.route("/", methods=['GET', 'POST'])
 def welcome_user():
@@ -124,11 +120,15 @@ def add_board():
     
     payload = request.get_json(force=True, silent=False, cache=False)
     user = queries.get_user_id(session["username"])
-    countBoards = str(len(queries.get_boards(session['user_id']))+ 1)
     
-    board_type = True if payload["boardType"] == "Public" else False
+    is_board_public = True if payload["title"] == "Public Board" else False
     
-    board = queries.add_board(user["id"], f'{payload["title"]} {countBoards}', board_type)
+    if is_board_public:
+        countBoards = str(queries.count_public_boards()['count']+ 1)
+    else:
+        countBoards = str(queries.count_private_boards(session['user_id'])['count']+ 1)
+    
+    board = queries.add_board(user["id"], f'{payload["title"]} {countBoards}', is_board_public)
     
     initial_statuses = ['new', 'in progress', 'testing', 'done']
     [queries.add_status(board['id'], title) for title in initial_statuses]
