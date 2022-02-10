@@ -7,10 +7,12 @@ import { initDragAndDrop } from "./drag_and_drop.js";
 
 export let boardsManager = {
   loadBoards: async function () {
-    const boards = await dataHandler.getBoards();
+    const data = await dataHandler.getBoards();
+    const boards = data[0];
+    const current_user_id = data[1]
     for (let board of boards) {
       const boardBuilder = htmlFactory(htmlTemplates.board);
-      const content = boardBuilder(board);
+      const content = boardBuilder(board, current_user_id);
       domManager.addChild("#root", content);
       domManager.addEventListener(
         `.board-toggle[data-board-id="${board.id}"]`,

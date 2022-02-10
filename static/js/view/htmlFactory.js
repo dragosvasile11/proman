@@ -18,9 +18,11 @@ export function htmlFactory(template) {
     }
 }
 
-function boardBuilder(board) {
-
-    let owner = (board.username.charAt(0).toUpperCase() + board.username.slice(1)).split('@')[0]
+function boardBuilder(board, current_user_id=null) {
+    let owner = ''
+    if (board.username && board.user_id != current_user_id) {
+        owner = 'by ' + (board.username.charAt(0).toUpperCase() + board.username.slice(1)).split('@')[0]
+    }
 
     return `<section class="board" section-board-id=${board.id}>
                 <div class="board-header" data-board-id=${board.id}><span class="board-title"><p id=${board.id} class="boardTitle" name="titleEdit" contenteditable="true" onkeypress="return (this.innerText.length <= 14)">${board.title}</p></span>
@@ -28,7 +30,7 @@ function boardBuilder(board) {
                         <button class="board-add-button btn btn-outline-info" type="button" id="new-card" name="new-card">+ New Card</button>
                         <button class="board-add-button btn btn-outline-info" type="button" id="new-column" name="new-card">+ New Column</button>
                         <button class="board-add-button btn btn-outline-danger" type="button" id="deleteBoard" name="delete-board" dataId=${board.id}>Delete Board</button>
-                        <p id='created-by' class='text-muted'>by ${owner}</p>
+                        <p id='created-by' class='text-muted'>${owner}</p>
                     </div>
                     <button class="board-toggle hidden" name="chevron" data-board-id="${board.id}"><img name="chevron" id="chevron${board.id}" data-board-id="${board.id}" src="./static/chevronDown.png" /></button>
                 </div>

@@ -88,7 +88,7 @@ def get_boards():
     """
     if 'user_id' not in session:
         session['user_id'] = 0
-    return queries.get_boards(session['user_id'])
+    return queries.get_boards(session['user_id']), session['user_id']
 
 
 @app.route("/api/boards/<int:board_id>/cards/")
@@ -129,7 +129,7 @@ def add_board():
         countBoards = str(queries.count_private_boards(session['user_id'])['count']+ 1)
     
     board = queries.add_board(user["id"], f'{payload["title"]} {countBoards}', is_board_public)
-    
+
     initial_statuses = ['new', 'in progress', 'testing', 'done']
     [queries.add_status(board['id'], title) for title in initial_statuses]
     

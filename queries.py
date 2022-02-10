@@ -149,7 +149,7 @@ def get_user_password(username):
 
 
 def add_board(user_id, title, boardType):
-    query = """
+    query = f"""
         INSERT INTO boards VALUES
             (DEFAULT, %(user_id)s, %(title)s, %(board_type)s)
             RETURNING id, title;
