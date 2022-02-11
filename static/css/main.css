@@ -318,7 +318,7 @@ span .card-title {
 /* muted text */
 
 #created-by {
-    position: absolute;
+    position: flex;
     padding: 20px;
     display: inline;
     right: 23%;
