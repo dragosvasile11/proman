@@ -258,10 +258,10 @@ section.board{
 .card-title,
 .boardTitle {
     width: fit-content;
-    -webkit-line-clamp: 2; 
+    /* -webkit-line-clamp: 1; 
     overflow: hidden; 
     text-overflow: ellipsis; 
-    display: -webkit-box;
+    display: -webkit-box; */
 }
 
 .board-title {
