@@ -29,6 +29,20 @@ This application was built as part of my CodeCool journey. \
 I've worked on this app 2 sprints (each sprint has 4 days) with the help of my team-mate Vlad Puschiulescu. \
 When we started working on this project we had about 6 months of programming experience and about 3 months of web development. \
 
+## Features of the project
+
+- Register new user
+- Login with credentials
+- Choose Public or Private when create a new board
+- Add a title for your new board
+- Add columns
+- Add cards
+- Edit or delete columns and cards
+- You can logout from your account and see all public boards from all users.
+
+![2022-07-14_04-44](https://user-images.githubusercontent.com/89748211/178873800-72e37227-9300-4d31-a3ba-6e7ec1712ddd.png)
+
+
 ## General requirements
 #### Under every requirement there is a command line for installation(windows only)
  - Python 3.8 or higher 
@@ -47,21 +61,3 @@ pip install virtualenv
 - Run the sql file from data folder on the newly created database
 - Enter your credentials(between " ") in the .env.template file and rename it to .env
 - Run the application from main.py file as a flask app
-
-## Features of the project
-
-- Register new user
-- Login with credentials
-- Choose Public or Private when create a new board
-- Add a title for your new board
-- Add columns
-- Add cards
-- Edit or delete columns and cards
-- You can logout from your account and see all public boards from all users.
-
-![2022-07-14_04-44](https://user-images.githubusercontent.com/89748211/178873800-72e37227-9300-4d31-a3ba-6e7ec1712ddd.png)
-
-
-
-
-
